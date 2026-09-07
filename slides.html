@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KCSP — Enterprise WhatsApp Security Awareness Platform</title>
+  <title>KCSP Pitch Deck — Open-Source WhatsApp Security Awareness</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,18 +19,9 @@
           },
           colors: {
             brand: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
               400: '#34d399',
               500: '#10b981',
               600: '#059669',
-              700: '#047857',
-              900: '#064e3b',
-              950: '#022c22',
-            },
-            accent: {
-              500: '#06b6d4',
-              600: '#0891b2',
             }
           }
         }
@@ -45,959 +36,586 @@
       .slide { opacity: 1 !important; display: flex !important; position: static !important; }
     }
     .slide-transition {
-      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .glass-card {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(15, 23, 42, 0.78);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .glass-card-glow {
-      background: rgba(15, 23, 42, 0.85);
+    .glass-glow {
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(16, 185, 129, 0.25);
+      border: 1px solid rgba(16, 185, 129, 0.3);
       box-shadow: 0 0 35px -10px rgba(16, 185, 129, 0.15);
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 9999px;
     }
   </style>
 </head>
 <body class="h-full select-none overflow-hidden flex flex-col font-sans bg-slate-950">
 
-  <!-- TOP HEADER / BRAND BAR -->
-  <header class="no-print h-14 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur px-6 flex items-center justify-between z-30 shrink-0">
+  <!-- TOP BAR -->
+  <header class="no-print h-14 border-b border-slate-800 bg-slate-950/90 backdrop-blur px-6 flex items-center justify-between z-30 shrink-0">
     <div class="flex items-center gap-3">
       <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-slate-950 font-extrabold text-sm shadow-lg shadow-brand-500/20">
-        🛡️
+        ⚡
       </div>
       <div>
         <div class="flex items-center gap-2">
-          <span class="font-extrabold text-sm tracking-wider uppercase text-white">KCSP Platform</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-500/10 text-brand-400 border border-brand-500/30">ENTERPRISE DECK</span>
+          <span class="font-extrabold text-sm tracking-wider uppercase text-white">KCSP</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-500/20 text-brand-400 border border-brand-500/30">STARTUP PITCH DECK</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">100% OPEN SOURCE</span>
         </div>
-        <p class="text-[11px] text-slate-400 hidden sm:block">WhatsApp Security Awareness Simulation Platform</p>
       </div>
     </div>
 
-    <!-- QUICK ACTIONS -->
+    <!-- ACTIONS -->
     <div class="flex items-center gap-3">
-      <a href="app_walkthrough.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold transition-all">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        <span>App Screenshots</span>
-      </a>
-      <a href="video_pitch_player.html" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-500/10 hover:bg-brand-500/20 text-brand-400 border border-brand-500/30 text-xs font-semibold transition-all">
-        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        <span>Watch Video Pitch</span>
-      </a>
-      <button onclick="togglePresenterNotes()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 text-xs font-medium border border-slate-700 transition-all" title="Toggle Speaker Notes [N]">
+      <button onclick="toggleNotes()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs font-medium border border-slate-700 transition" title="Toggle Notes [N]">
         <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
-        <span class="hidden md:inline">Notes</span> <kbd class="px-1 py-0.2 rounded bg-slate-900 text-[10px] text-slate-400 font-mono">N</kbd>
+        <span>Notes</span> <kbd class="px-1 rounded bg-slate-900 text-[10px] text-slate-400 font-mono">N</kbd>
       </button>
-      <button onclick="toggleFullscreen()" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition-all" title="Fullscreen [F]">
+      <button onclick="toggleFullscreen()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition" title="Fullscreen [F]">
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
       </button>
-      <button onclick="window.print()" class="p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition-all" title="Print to PDF">
+      <button onclick="window.print()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition" title="Export PDF">
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
       </button>
     </div>
   </header>
 
-  <!-- MAIN PRESENTATION CANVAS (16:9 RATIO ENFORCED) -->
+  <!-- 16:9 SLIDES CANVAS -->
   <main class="flex-1 relative flex items-center justify-center p-2 sm:p-6 overflow-hidden">
-    <div id="deck-wrapper" class="w-full max-w-7xl h-full max-h-[850px] aspect-[16/9] relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800/80 bg-slate-900/90 flex flex-col">
+    <div id="deck-wrapper" class="w-full max-w-7xl h-full max-h-[850px] aspect-[16/9] relative rounded-3xl overflow-hidden shadow-2xl border border-slate-800/80 bg-slate-900/95 flex flex-col">
 
-      <!-- SLIDE 1: TITLE & COVER -->
+      <!-- SLIDE 1: PUNCHY COVER -->
       <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-100 z-10 slide-transition bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/40" data-slide="1">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            ENTERPRISE BRIEFING 2026
+          <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs font-bold">
+            <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+            OPEN-SOURCE CYBERSECURITY
           </div>
-          <div class="text-xs text-slate-400 font-mono">KCSP // SEC-AWARE-V1.0</div>
+          <div class="text-xs font-mono text-slate-400">KCSP // SEED PITCH</div>
         </div>
 
         <div class="max-w-3xl my-auto space-y-6">
-          <div class="space-y-2">
-            <div class="inline-block text-brand-400 font-mono text-sm tracking-widest uppercase font-semibold">Authorized Mobile Threat Simulation</div>
-            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              Enterprise <span class="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">WhatsApp Security</span> Awareness Platform
+          <div class="space-y-3">
+            <div class="inline-block text-brand-400 font-mono text-xs uppercase tracking-widest font-bold">Human Resilience for the Mobile Era</div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+              Phishing moved to WhatsApp. <br>
+              <span class="bg-gradient-to-r from-brand-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">We built the defense.</span>
             </h1>
           </div>
-          <p class="text-lg sm:text-xl text-slate-300 font-light leading-relaxed">
-            Safely measure, train, and strengthen organizational resilience against the fastest-growing mobile social engineering vector.
+          <p class="text-base sm:text-xl text-slate-300 font-light leading-relaxed">
+            The open-source WhatsApp security awareness simulation platform. Test employee resilience where modern attacks actually happen—safely, ethically, and with zero passwords stored.
           </p>
 
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
-            <div class="p-3.5 rounded-2xl glass-card border-slate-700/60">
-              <div class="text-brand-400 text-xl mb-1">🛡️</div>
-              <div class="font-bold text-xs text-white">Zero-Credential Safe</div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Never collects passwords</div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div class="p-3.5 rounded-2xl glass-card">
+              <div class="text-brand-400 font-extrabold text-lg">🛡️ Zero-Cred</div>
+              <div class="text-xs text-slate-300 font-semibold mt-1">DOM Interception</div>
+              <div class="text-[11px] text-slate-500">Zero liability</div>
             </div>
-            <div class="p-3.5 rounded-2xl glass-card border-slate-700/60">
-              <div class="text-cyan-400 text-xl mb-1">⚡</div>
-              <div class="font-bold text-xs text-white">Multi-Provider Engine</div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Mock, WASender, WPPConnect</div>
+            <div class="p-3.5 rounded-2xl glass-card">
+              <div class="text-cyan-400 font-extrabold text-lg">⚡ Pluggable</div>
+              <div class="text-xs text-slate-300 font-semibold mt-1">Multi-Provider</div>
+              <div class="text-[11px] text-slate-500">Mock, WASender, WPPConnect</div>
             </div>
-            <div class="p-3.5 rounded-2xl glass-card border-slate-700/60">
-              <div class="text-amber-400 text-xl mb-1">💡</div>
-              <div class="font-bold text-xs text-white">Teachable Moments</div>
-              <div class="text-[11px] text-slate-400 mt-0.5">Instant educational debrief</div>
+            <div class="p-3.5 rounded-2xl glass-card">
+              <div class="text-amber-400 font-extrabold text-lg">💡 Teachable</div>
+              <div class="text-xs text-slate-300 font-semibold mt-1">Instant Debrief</div>
+              <div class="text-[11px] text-slate-500">Train at point of risk</div>
             </div>
-            <div class="p-3.5 rounded-2xl glass-card border-slate-700/60">
-              <div class="text-purple-400 text-xl mb-1">🇪🇺</div>
-              <div class="font-bold text-xs text-white">GDPR Privacy-by-Design</div>
-              <div class="text-[11px] text-slate-400 mt-0.5">HMAC hashing & 1-click erasure</div>
+            <div class="p-3.5 rounded-2xl glass-card">
+              <div class="text-purple-400 font-extrabold text-lg">💻 100% OSS</div>
+              <div class="text-xs text-slate-300 font-semibold mt-1">Self-Hostable</div>
+              <div class="text-[11px] text-slate-500">Docker in 60 seconds</div>
             </div>
           </div>
         </div>
 
-        <div class="flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-800/80">
-          <div>Built for CISOs, Red Teams & Security Awareness Leaders</div>
-          <div class="flex items-center gap-2">
-            <span>Press</span>
-            <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 font-mono text-[10px]">Space</kbd>
-            <span>or</span>
-            <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 font-mono text-[10px]">→</kbd>
-            <span>to advance</span>
-          </div>
+        <div class="flex items-center justify-between text-xs text-slate-400 pt-4 border-t border-slate-800">
+          <div>Built by security engineers for modern tech teams</div>
+          <div class="font-mono text-brand-400">Press Space or → to advance</div>
         </div>
       </section>
 
-      <!-- SLIDE 2: THE THREAT LANDSCAPE -->
+      <!-- SLIDE 2: THE PROBLEM -->
       <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="2">
         <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-rose-400 uppercase tracking-wider font-semibold">The Emerging Perimeter Risk</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Why Attackers Are Bypassing Corporate Email</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/30 text-xs font-bold">THE MOBILE BLIND SPOT</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-auto">
-          <!-- Traditional Email Defenses -->
-          <div class="p-6 rounded-3xl glass-card border-slate-800 space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-              <div class="flex items-center gap-2.5">
-                <span class="text-xl">✉️</span>
-                <span class="font-bold text-slate-300">Corporate Email (Hardened)</span>
-              </div>
-              <span class="text-xs px-2.5 py-0.5 rounded bg-slate-800 text-slate-400">99%+ Blocked</span>
-            </div>
-            <ul class="space-y-3 text-xs sm:text-sm text-slate-400">
-              <li class="flex items-start gap-2.5">
-                <span class="text-rose-400 font-bold">✕</span>
-                <span>Protected by multi-million dollar Secure Email Gateways (Proofpoint, Mimecast).</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="text-rose-400 font-bold">✕</span>
-                <span>DMARC, SPF, and DKIM actively drop domain impersonations.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="text-slate-500 font-bold">~</span>
-                <span>Low engagement: Only ~20% open rate, with delayed checks.</span>
-              </li>
-            </ul>
-            <div class="p-3 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs text-slate-400">
-              Attackers know corporate inboxes are guarded fortresses.
-            </div>
-          </div>
-
-          <!-- WhatsApp Channel Reality -->
-          <div class="p-6 rounded-3xl glass-card-glow border-emerald-500/30 space-y-4">
-            <div class="flex items-center justify-between pb-3 border-b border-emerald-500/20">
-              <div class="flex items-center gap-2.5">
-                <span class="text-xl">📱</span>
-                <span class="font-bold text-white">WhatsApp Messaging (Unprotected)</span>
-              </div>
-              <span class="text-xs px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">Zero Gateway Defense</span>
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-              <div class="p-3 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 text-center">
-                <div class="text-3xl font-extrabold text-emerald-400">>98%</div>
-                <div class="text-[11px] text-slate-300 font-medium">Open Rate</div>
-              </div>
-              <div class="p-3 rounded-2xl bg-teal-950/40 border border-teal-500/30 text-center">
-                <div class="text-3xl font-extrabold text-teal-400">< 3 min</div>
-                <div class="text-[11px] text-slate-300 font-medium">Avg. Response Time</div>
-              </div>
-            </div>
-            <ul class="space-y-2 text-xs sm:text-sm text-slate-300">
-              <li class="flex items-start gap-2">
-                <span class="text-emerald-400 font-bold">✓</span>
-                <span><strong>High Implicit Trust</strong>: Users regard mobile chats as personal and verified.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-emerald-400 font-bold">✓</span>
-                <span><strong>Mobile Distraction</strong>: Checked on the go, with minimal scrutiny of link domains.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-emerald-400 font-bold">✓</span>
-                <span><strong>Enterprise Blind Spot</strong>: Traditional awareness platforms have zero WhatsApp simulation capabilities.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="text-xs text-slate-400 flex items-center justify-between border-t border-slate-800/80 pt-3">
-          <span>Target Vectors: Smishing, Quishing, Spoofed Executive Messages, Fake MFA/IT Alerts</span>
-          <span class="text-emerald-400 font-medium">KCSP fills this critical visibility gap →</span>
-        </div>
-      </section>
-
-      <!-- SLIDE 3: PLATFORM OVERVIEW -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="3">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-semibold">The Complete Solution</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Introducing KCSP: Ethical Mobile Awareness</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30 text-xs font-bold">ENTERPRISE MONOLITH</span>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-auto">
-          <div class="p-6 rounded-3xl glass-card space-y-3">
-            <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg">
-              01
-            </div>
-            <h3 class="text-lg font-bold text-white">Realistic Simulations</h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Launch targeted campaigns that mirror modern adversary tactics: urgent IT password resets, fake HR circulars, and executive payroll notifications.
-            </p>
-            <div class="pt-2 text-xs text-brand-400 font-mono">Dynamic variables: {{first_name}}, {{department}}</div>
-          </div>
-
-          <div class="p-6 rounded-3xl glass-card space-y-3">
-            <div class="w-10 h-10 rounded-2xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-lg">
-              02
-            </div>
-            <h3 class="text-lg font-bold text-white">Zero-Credential Safety</h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Proprietary client-side form interception strictly purges passwords and tokens in the browser DOM. No user credentials ever touch your servers or network logs.
-            </p>
-            <div class="pt-2 text-xs text-cyan-400 font-mono">Guaranteed 100% legal & compliance safe</div>
-          </div>
-
-          <div class="p-6 rounded-3xl glass-card space-y-3">
-            <div class="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg">
-              03
-            </div>
-            <h3 class="text-lg font-bold text-white">Actionable Resilience Telemetry</h3>
-            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Track open rates, unique click-through rates, and interaction ratios across departments. Calculate an objective organizational Resilience Score.
-            </p>
-            <div class="pt-2 text-xs text-purple-400 font-mono">Export executive & anonymized CSV reports</div>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs text-slate-400">
-          <div class="flex items-center gap-2">
-            <span class="text-emerald-400">●</span> Built with Next.js 14, TypeScript, Prisma ORM, and Tailwind CSS.
-          </div>
-          <div class="font-mono text-slate-300">Ready for internal security drills & red team engagements</div>
-        </div>
-      </section>
-
-      <!-- SLIDE 4: ARCHITECTURE & MONOREPO -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="4">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-cyan-400 uppercase tracking-wider font-semibold">Modular Monorepo Architecture</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Clean Domain Boundaries & High Concurrency</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs font-mono">SYSTEM SPEC</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
-          <!-- Web App -->
-          <div class="p-5 rounded-3xl glass-card border-cyan-500/30 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold text-cyan-400">apps/web</span>
-              <span class="px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 text-[10px]">Next.js 14+</span>
-            </div>
-            <h3 class="text-base font-bold text-white">Admin Console & Endpoints</h3>
-            <ul class="text-xs text-slate-400 space-y-2">
-              <li>• Protected Admin UI (Campaigns, Analytics, Queue, Settings)</li>
-              <li>• Public Opaque Tracking Endpoint: <code class="text-cyan-300 bg-slate-900 px-1 py-0.5 rounded">/t/[token]</code></li>
-              <li>• Controlled Simulation Landing Pages: <code class="text-cyan-300 bg-slate-900 px-1 py-0.5 rounded">/s/[token]</code></li>
-              <li>• Webhook Ingestion & Health Checks</li>
-            </ul>
-          </div>
-
-          <!-- Engine & WhatsApp -->
-          <div class="p-5 rounded-3xl glass-card border-brand-500/30 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold text-brand-400">packages/engine + whatsapp</span>
-              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 text-[10px]">Queue & Adapters</span>
-            </div>
-            <h3 class="text-base font-bold text-white">Dispatch Engine & Providers</h3>
-            <ul class="text-xs text-slate-400 space-y-2">
-              <li>• Asynchronous Outbound Job Queue with rate limiting & jitter</li>
-              <li>• Exponential backoff retries & guaranteed idempotency</li>
-              <li>• Provider Abstraction: <code class="text-brand-300 bg-slate-900 px-1 py-0.5 rounded">Mock</code>, <code class="text-brand-300 bg-slate-900 px-1 py-0.5 rounded">WASender</code>, <code class="text-brand-300 bg-slate-900 px-1 py-0.5 rounded">WPPConnect</code></li>
-              <li>• Automated queue pausing on gateway disconnect</li>
-            </ul>
-          </div>
-
-          <!-- Tracking, Analytics & Privacy -->
-          <div class="p-5 rounded-3xl glass-card border-purple-500/30 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs font-bold text-purple-400">packages/tracking + analytics</span>
-              <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 text-[10px]">Security & GDPR</span>
-            </div>
-            <h3 class="text-base font-bold text-white">Privacy & Telemetry Store</h3>
-            <ul class="text-xs text-slate-400 space-y-2">
-              <li>• 32-byte opaque crypto tokens (zero PII in URLs)</li>
-              <li>• HMAC SHA-256 IP/User-Agent hashing with dynamic salt</li>
-              <li>• Client-side credential sanitization hook</li>
-              <li>• Aggregated Department risk analytics & CSV exports</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>Database: Multi-dialect Prisma ORM (SQLite WAL Mode & Managed PostgreSQL)</span>
-          <span class="text-cyan-400">Monorepo Managed via npm Workspaces</span>
-        </div>
-      </section>
-
-      <!-- SLIDE 5: PROVIDER ABSTRACTION -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="5">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-semibold">Zero-Lock-In Connectivity</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Pluggable WhatsApp Provider Abstraction</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30 text-xs font-bold">FLEXIBILITY</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
-          <!-- Mock Provider -->
-          <div class="p-6 rounded-3xl glass-card border-slate-800 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-2xl">🧪</span>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-800 text-slate-300">$0 / Zero API Keys</span>
-            </div>
-            <h3 class="text-lg font-bold text-white">Mock Provider</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Designed for local development, instant testing, demonstrations, and CI/CD automated validation. Simulates realistic latency and delivery failure rates with zero external network calls.
-            </p>
-            <div class="pt-2 text-xs font-mono text-brand-400">Default for safe trial runs</div>
-          </div>
-
-          <!-- WASender API -->
-          <div class="p-6 rounded-3xl glass-card-glow border-brand-500/30 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-2xl">🌐</span>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-brand-500/20 text-brand-400">High Throughput</span>
-            </div>
-            <h3 class="text-lg font-bold text-white">WASenderAPI Gateway</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Production cloud adapter connecting directly to WASenderAPI service. Features bearer token authorization, webhook validation, and automated session health probes.
-            </p>
-            <div class="pt-2 text-xs font-mono text-brand-300">Ideal for mid-to-large enterprises</div>
-          </div>
-
-          <!-- WPPConnect -->
-          <div class="p-6 rounded-3xl glass-card border-slate-800 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-2xl">🏢</span>
-              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-400">Self-Hosted</span>
-            </div>
-            <h3 class="text-lg font-bold text-white">WPPConnect Adapter</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Deploy your own containerized WhatsApp instance for total data sovereignty. Messages are dispatched entirely through your internal network with no third-party data transit.
-            </p>
-            <div class="pt-2 text-xs font-mono text-purple-400">Strict on-premise compliance</div>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between text-xs text-amber-300">
-          <div class="flex items-center gap-2">
-            <span>🛡️</span>
-            <strong>Fail-Safe Protection:</strong> Outbound queue automatically pauses if the WhatsApp gateway reports a logged-out or disconnected state.
-          </div>
-          <span class="font-mono text-amber-200">Zero Lost Messages</span>
-        </div>
-      </section>
-
-      <!-- SLIDE 6: CAMPAIGN WORKFLOW -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="6">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-semibold">End-to-End Execution</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">4-Step Campaign Orchestration Pipeline</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30 text-xs font-bold">AUTOMATED WORKFLOW</span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 my-auto">
-          <!-- Step 1 -->
-          <div class="p-5 rounded-3xl glass-card space-y-3 relative">
-            <div class="text-xs font-mono text-brand-400 font-bold">STEP 01</div>
-            <h3 class="font-bold text-white text-base">Segment Participants</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Import participant roster via CSV or REST API. Assign employees to departmental units (Finance, HR, IT, Executive).
-            </p>
-            <div class="p-2 bg-slate-900 rounded-xl font-mono text-[11px] text-slate-400">
-              CSV: phone, department
-            </div>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="p-5 rounded-3xl glass-card space-y-3 relative">
-            <div class="text-xs font-mono text-cyan-400 font-bold">STEP 02</div>
-            <h3 class="font-bold text-white text-base">Personalize Template</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Configure dynamic templates with smart placeholders:
-              <span class="text-cyan-300 font-mono text-[11px]">{{first_name}}</span>,
-              <span class="text-cyan-300 font-mono text-[11px]">{{department}}</span>,
-              <span class="text-cyan-300 font-mono text-[11px]">{{tracking_url}}</span>.
-            </p>
-            <div class="p-2 bg-slate-900 rounded-xl font-mono text-[11px] text-cyan-300">
-              Contextual Phishing
-            </div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="p-5 rounded-3xl glass-card space-y-3 relative">
-            <div class="text-xs font-mono text-purple-400 font-bold">STEP 03</div>
-            <h3 class="font-bold text-white text-base">Queued Dispatch</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Execution engine queues outbound jobs with concurrency limits, anti-spam jitter intervals, and exponential backoff retry logic.
-            </p>
-            <div class="p-2 bg-slate-900 rounded-xl font-mono text-[11px] text-purple-300">
-              Guaranteed Idempotency
-            </div>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="p-5 rounded-3xl glass-card space-y-3 relative">
-            <div class="text-xs font-mono text-emerald-400 font-bold">STEP 04</div>
-            <h3 class="font-bold text-white text-base">Live Telemetry Sync</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Inbound webhooks update delivery status: SENT → DELIVERED → CLICKED → INTERACTED. Telemetry streams directly to the dashboard.
-            </p>
-            <div class="p-2 bg-slate-900 rounded-xl font-mono text-[11px] text-emerald-300">
-              Real-Time Webhooks
-            </div>
-          </div>
-        </div>
-
-        <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 flex items-center justify-between text-xs text-slate-400">
-          <span>Simulation Scenarios: Microsoft 365 Verification, HR Policy Compliance, Urgent Payroll Alert</span>
-          <span class="font-mono text-brand-400">100% Automated Lifecycle</span>
-        </div>
-      </section>
-
-      <!-- SLIDE 7: ZERO-CREDENTIAL ARCHITECTURE -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="7">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-semibold">Core Ethical Safety Guarantee</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Zero-Credential Safe Simulation Engine</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-bold">LEGAL & ETHICAL SHIELD</span>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 my-auto items-center">
-          <div class="space-y-4">
-            <h3 class="text-xl font-bold text-white leading-snug">
-              Eliminate Credential Liabilities Without Sacrificing Simulation Realism
-            </h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              In conventional simulation tools, employees accidentally submitting real corporate credentials risk exposing secrets to internal admins and third-party SaaS vendors.
-            </p>
-
-            <div class="space-y-3 text-xs sm:text-sm text-slate-300">
-              <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
-                <span class="text-emerald-400 font-bold text-base mt-0.5">✓</span>
-                <div>
-                  <strong class="text-white block">Client-Side Form Interception</strong>
-                  <span>Forms on simulation pages are intercepted via DOM JavaScript. Plaintext passwords, pins, and tokens are scrubbed in client memory before network transmission.</span>
-                </div>
-              </div>
-
-              <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
-                <span class="text-emerald-400 font-bold text-base mt-0.5">✓</span>
-                <div>
-                  <strong class="text-white block">Zero Credential Storage</strong>
-                  <span>The backend API (<code class="text-brand-400">/api/simulation/interact</code>) records strictly a binary event: <em>User Interacted = True</em>. No secrets are ever persisted.</span>
-                </div>
-              </div>
-
-              <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-start gap-3">
-                <span class="text-emerald-400 font-bold text-base mt-0.5">✓</span>
-                <div>
-                  <strong class="text-white block">Full Compliance Protection</strong>
-                  <span>Satisfies union agreements, GDPR Article 5 data minimization, and ISO 27001 ethics guidelines.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Interactive UI Mockup -->
-          <div class="p-6 rounded-3xl bg-slate-900/90 border border-emerald-500/30 space-y-4 shadow-2xl">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs">
-              <span class="font-mono text-emerald-400">● CLIENT_SIDE_INTERCEPTOR.TS</span>
-              <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 text-[10px]">ACTIVE SHIELD</span>
-            </div>
-            
-            <div class="space-y-3 font-mono text-xs">
-              <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-                <span class="text-slate-500">// User inputs in browser:</span>
-                <div class="text-slate-300">Username: <span class="text-emerald-400">mario.rossi@company.com</span></div>
-                <div class="text-slate-300">Password: <span class="text-rose-400">•••••••••••••• (Entered)</span></div>
-              </div>
-
-              <div class="flex items-center justify-center py-1 text-emerald-400 text-xs font-bold">
-                ↓ CLIENT-SIDE DOM SANITIZATION FILTER ↓
-              </div>
-
-              <div class="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 space-y-1">
-                <span class="text-emerald-400">// Transmitted to KCSP Backend:</span>
-                <div class="text-slate-300">{</div>
-                <div class="pl-4 text-slate-300">"token": <span class="text-cyan-300">"9f8a7e6b5c4d3..."</span>,</div>
-                <div class="pl-4 text-emerald-300">"password": <span class="text-emerald-400 font-bold">"USER_ENTERED_VALUE"</span>,</div>
-                <div class="pl-4 text-slate-300">"eventType": <span class="text-purple-300">"SIMULATION_INTERACTION"</span></div>
-                <div class="text-slate-300">}</div>
-              </div>
-            </div>
-
-            <div class="text-[11px] text-center text-slate-400">
-              Zero Plaintext Passwords Recorded • Complete Legal Immunity
-            </div>
-          </div>
-        </div>
-
-        <div class="text-xs text-slate-400 flex items-center justify-between border-t border-slate-800 pt-3">
-          <span>Controlled Landing Pages: Microsoft 365 SSO, HR Policy Verification, Urgent Alert</span>
-          <span class="text-emerald-400">Safe for all enterprise employees</span>
-        </div>
-      </section>
-
-      <!-- SLIDE 8: THE TEACHABLE MOMENT -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="8">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-amber-400 uppercase tracking-wider font-semibold">Immediate Behavioral Feedback</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">The Teachable Moment: Instant Educational Debrief</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-bold">POSITIVE LEARNING</span>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 my-auto items-center">
-          <div class="space-y-4">
-            <h3 class="text-xl font-bold text-white leading-snug">
-              Turn Mistakes into Lasting Habits Through Zero-Latency Feedback
-            </h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
-              Cognitive psychology demonstrates that security awareness training delivered days after a drill suffers a 70%+ drop in learning retention. 
-              KCSP responds instantaneously.
-            </p>
-
-            <ul class="space-y-3 text-xs sm:text-sm text-slate-300">
-              <li class="flex items-start gap-2.5">
-                <span class="text-amber-400 font-bold text-base">●</span>
-                <span><strong>Instant Morphing UI</strong>: The simulation form instantly transitions into an educational debrief card upon interaction.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="text-amber-400 font-bold text-base">●</span>
-                <span><strong>Three Critical Clues</strong>: Highlights the exact red flags present in the message: unexpected WhatsApp channel, spoofed URL domain, and artificial emotional urgency.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="text-emerald-400 font-bold text-base">●</span>
-                <span><strong>Positive, Non-Punitive Culture</strong>: Avoids shaming or reprimands, building an active, empowered human defense network.</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Educational Debrief Card Preview -->
-          <div class="p-6 rounded-3xl bg-white text-slate-900 shadow-2xl border-2 border-amber-400 space-y-4">
-            <div class="flex items-center gap-3 border-b border-amber-100 pb-3">
-              <div class="w-9 h-9 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">
-                ⚠️
-              </div>
-              <div>
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">Security Awareness Simulation</span>
-                <h4 class="font-bold text-base text-slate-900">Questa era una simulazione autorizzata!</h4>
-              </div>
-            </div>
-
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Nessuna password o dato personale è stato memorizzato. Questa esercitazione è stata creata per aiutarti a riconoscere gli attacchi di social engineering via WhatsApp.
-            </p>
-
-            <div class="p-3 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-slate-800 space-y-2">
-              <div class="font-bold text-amber-900 uppercase text-[10px] tracking-wide">Campanelli d'allarme che avresti potuto notare:</div>
-              <ul class="space-y-1.5 text-[11px] text-amber-950">
-                <li class="flex items-center gap-2"><span>1.</span> Canale anomalo: l'IT aziendale non richiede mai credenziali via WhatsApp.</li>
-                <li class="flex items-center gap-2"><span>2.</span> Il link non appartiene al dominio aziendale ufficiale.</li>
-                <li class="flex items-center gap-2"><span>3.</span> Senso di urgenza artificioso per indurre un'azione frettolosa.</li>
-              </ul>
-            </div>
-
-            <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center gap-2 text-xs text-emerald-900">
-              <span class="text-emerald-600 font-bold">✓</span>
-              <span><strong>Cosa fare in futuro:</strong> Segnala sempre i messaggi anomali al team Security!</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-xs text-slate-400 flex items-center justify-between border-t border-slate-800 pt-3">
-          <span>Proven Result: 4x Higher Retention vs Traditional Phishing Modules</span>
-          <span class="text-amber-400">Builds a culture of proactive defenders</span>
-        </div>
-      </section>
-
-      <!-- SLIDE 9: GDPR & PRIVACY BY DESIGN -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="9">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-purple-400 uppercase tracking-wider font-semibold">Strict Regulatory Compliance</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">GDPR Compliance & Privacy-by-Design</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/30 text-xs font-bold">EU PRIVACY READY</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
-          <!-- Opaque Tokens & HMAC -->
-          <div class="p-6 rounded-3xl glass-card space-y-3">
-            <div class="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg">
-              🔐
-            </div>
-            <h3 class="text-base font-bold text-white">Cryptographic Data Minimization</h3>
-            <ul class="text-xs text-slate-300 space-y-2.5">
-              <li class="flex items-start gap-2">
-                <span class="text-purple-400 font-bold">✓</span>
-                <span><strong>Opaque Tracking URLs</strong>: Uses high-entropy 32-byte tokens. No email addresses, phone numbers, or employee IDs are exposed in URLs.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-purple-400 font-bold">✓</span>
-                <span><strong>HMAC SHA-256 IP/User-Agent Hashing</strong>: Client IPs and browser signatures are salted and hashed. Telemetry verifies uniqueness without storing raw personal data.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-purple-400 font-bold">✓</span>
-                <span><strong>Phone Number Masking</strong>: Sensitive participant telephone numbers are masked in administrative displays.</span>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Right to Erasure & Audit Logs -->
-          <div class="p-6 rounded-3xl glass-card space-y-3">
-            <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg">
-              📋
-            </div>
-            <h3 class="text-base font-bold text-white">Right to Erasure & Auditability</h3>
-            <ul class="text-xs text-slate-300 space-y-2.5">
-              <li class="flex items-start gap-2">
-                <span class="text-emerald-400 font-bold">✓</span>
-                <span><strong>1-Click GDPR Anonymization</strong>: Completely purges employee personal identifiers while preserving statistical department risk scores for historical trends.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-emerald-400 font-bold">✓</span>
-                <span><strong>Configurable Retention Schedules</strong>: Automatically triggers data scrubbing after campaigns conclude.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="text-emerald-400 font-bold">✓</span>
-                <span><strong>Tamper-Evident Audit Trail</strong>: Every admin action (campaign creation, report exports, anonymization) is logged with user ID and timestamp.</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
-          <span>GDPR Article 5 & 17 Compliant • ISO 27001 Ready</span>
-          <span class="text-purple-400">Zero Liability Telemetry</span>
-        </div>
-      </section>
-
-      <!-- SLIDE 10: REAL-TIME ANALYTICS & RESILIENCE SCORING -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="10">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-semibold">Executive Intelligence</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Real-Time Analytics & Resilience Scoring</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30 text-xs font-bold">BOARDROOM TELEMETRY</span>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 my-auto">
-          <!-- KPI Gauges -->
-          <div class="p-6 rounded-3xl glass-card space-y-4">
-            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Key Simulation KPIs</h3>
-            <div class="space-y-3">
-              <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
-                <span class="text-xs text-slate-300">Delivery Success</span>
-                <span class="text-base font-bold text-emerald-400">98.4%</span>
-              </div>
-              <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
-                <span class="text-xs text-slate-300">Unique Click Rate</span>
-                <span class="text-base font-bold text-cyan-400">34.2%</span>
-              </div>
-              <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
-                <span class="text-xs text-slate-300">Interaction Rate</span>
-                <span class="text-base font-bold text-rose-400">18.5%</span>
-              </div>
-              <div class="p-3.5 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-between">
-                <span class="text-xs text-emerald-300 font-bold">Resilience Score</span>
-                <span class="text-lg font-extrabold text-emerald-400">81.5 / 100</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Department Breakdown -->
-          <div class="p-6 rounded-3xl glass-card lg:col-span-2 space-y-4">
-            <div class="flex items-center justify-between">
-              <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Vulnerability by Department</h3>
-              <span class="text-xs text-slate-500 font-mono">Simulated Attack Drill</span>
-            </div>
-            
-            <div class="space-y-3">
-              <div>
-                <div class="flex justify-between text-xs mb-1">
-                  <span class="text-slate-300 font-medium">Finance & Accounting</span>
-                  <span class="text-rose-400 font-bold">42% (High Risk)</span>
-                </div>
-                <div class="h-2.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                  <div class="h-full bg-rose-500 rounded-full" style="width: 42%"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between text-xs mb-1">
-                  <span class="text-slate-300 font-medium">Human Resources</span>
-                  <span class="text-amber-400 font-bold">29% (Medium Risk)</span>
-                </div>
-                <div class="h-2.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                  <div class="h-full bg-amber-500 rounded-full" style="width: 29%"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between text-xs mb-1">
-                  <span class="text-slate-300 font-medium">Sales & Marketing</span>
-                  <span class="text-amber-400 font-bold">25% (Medium Risk)</span>
-                </div>
-                <div class="h-2.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                  <div class="h-full bg-amber-400 rounded-full" style="width: 25%"></div>
-                </div>
-              </div>
-
-              <div>
-                <div class="flex justify-between text-xs mb-1">
-                  <span class="text-slate-300 font-medium">IT & Engineering</span>
-                  <span class="text-emerald-400 font-bold">6% (Strong Resilience)</span>
-                </div>
-                <div class="h-2.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                  <div class="h-full bg-emerald-500 rounded-full" style="width: 6%"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800">
-              <span>Tailor subsequent awareness workshops directly to the most vulnerable departments.</span>
-              <span class="font-mono text-emerald-400">CSV Export Ready</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-xs text-slate-400 flex items-center justify-between border-t border-slate-800 pt-3">
-          <span>Dual CSV Reports: Full Administrative Audit (SOC 2) & Fully Anonymized Board Presentation</span>
-          <span class="text-cyan-400">Objective Security ROI</span>
-        </div>
-      </section>
-
-      <!-- SLIDE 11: DEPLOYMENT & DEVOPS -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="11">
-        <div class="flex items-center justify-between">
-          <div>
-            <div class="text-xs font-mono text-cyan-400 uppercase tracking-wider font-semibold">DevOps & Infrastructure</div>
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Docker-Ready, Cloud-Native Deployment</h2>
-          </div>
-          <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-xs font-mono">PRODUCTION READY</span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
-          <!-- Docker Compose -->
-          <div class="p-6 rounded-3xl glass-card space-y-3">
-            <div class="text-2xl">🐳</div>
-            <h3 class="text-base font-bold text-white">Turnkey Docker Compose</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Multi-stage optimized Dockerfile. Spin up the entire platform in a single command. Includes automatic environment injection and health checks.
-            </p>
-            <div class="p-2.5 bg-slate-900 rounded-xl font-mono text-[11px] text-cyan-300">
-              docker compose up -d
-            </div>
-          </div>
-
-          <!-- Caddy Auto-HTTPS -->
-          <div class="p-6 rounded-3xl glass-card space-y-3">
-            <div class="text-2xl">🔒</div>
-            <h3 class="text-base font-bold text-white">Automated Caddy HTTPS</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Zero-config TLS certificate issuance and renewal via Let's Encrypt. High-performance HTTP/2 reverse proxy ready for production domains.
-            </p>
-            <div class="p-2.5 bg-slate-900 rounded-xl font-mono text-[11px] text-brand-300">
-              Automatic TLS Certificates
-            </div>
-          </div>
-
-          <!-- Storage Migration -->
-          <div class="p-6 rounded-3xl glass-card space-y-3">
-            <div class="text-2xl">🗄️</div>
-            <h3 class="text-base font-bold text-white">Flexible Database Tier</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Runs out of the box on high-concurrency SQLite with Write-Ahead Logging (WAL) and automated backups, or scales seamlessly to DigitalOcean / AWS Managed PostgreSQL.
-            </p>
-            <div class="p-2.5 bg-slate-900 rounded-xl font-mono text-[11px] text-purple-300">
-              SQLite WAL ⇄ PostgreSQL
-            </div>
-          </div>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex items-center justify-between text-xs text-slate-400">
-          <div>Supported Targets: DigitalOcean Droplets, AWS EC2 / ECS, Azure App Service, On-Premise Kubernetes</div>
-          <div class="font-mono text-cyan-400">Deployable in < 5 minutes</div>
-        </div>
-      </section>
-
-      <!-- SLIDE 12: CONCLUSION & CTA -->
-      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-gradient-to-br from-slate-950 via-slate-900 to-brand-950/40" data-slide="12">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30 text-xs font-semibold">
-            <span>🚀</span> NEXT STEPS
-          </div>
-          <span class="text-xs font-mono text-slate-400">KCSP SUMMARY</span>
+          <div class="text-xs font-mono text-rose-400 uppercase tracking-wider font-bold">THE REALITY OF MODERN BREACHES</div>
+          <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-400 text-xs font-bold border border-rose-500/30">THE BLIND SPOT</span>
         </div>
 
         <div class="max-w-3xl my-auto space-y-6">
           <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
-            Close the Mobile Security Gap. <br>
-            <span class="bg-gradient-to-r from-brand-400 to-teal-300 bg-clip-text text-transparent">Strengthen Your Human Firewall.</span>
+            Corporate email security is a fortress. <br>
+            <span class="text-rose-400">Your employees' WhatsApp is wide open.</span>
           </h2>
           <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
-            WhatsApp social engineering is no longer an emerging theory—it is active in the wild. Equip your security team with the tools to safely measure risk and educate employees before an attacker strikes.
+            Companies spend millions on Secure Email Gateways (Mimecast, Proofpoint) and train employees to spot fake email banners. 
+            Attackers adapted overnight: they message your developers, payroll team, and executives directly on WhatsApp with fake IT urgent resets and HR circulars.
           </p>
 
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-            <div class="p-4 rounded-2xl glass-card-glow border-brand-500/40">
-              <div class="text-xs font-mono text-brand-400 font-bold mb-1">01. TRY DEMO DRILL</div>
-              <div class="font-mono text-xs text-white bg-slate-950 p-2 rounded-lg mb-2">npm run demo</div>
-              <div class="text-[11px] text-slate-300">Run a simulated campaign with 5 participants in 30 seconds.</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-5 rounded-2xl glass-card border-slate-800 space-y-2">
+              <div class="font-bold text-slate-300 flex items-center gap-2"><span>✉️</span> Traditional Email Training</div>
+              <p class="text-xs text-slate-400">Employees ignore drills or look at headers. 99% of phishing never makes it to the inbox anyway.</p>
             </div>
-
-            <div class="p-4 rounded-2xl glass-card border-slate-700">
-              <div class="text-xs font-mono text-cyan-400 font-bold mb-1">02. ADMIN CONSOLE</div>
-              <div class="font-mono text-xs text-white bg-slate-950 p-2 rounded-lg mb-2">http://localhost:3000</div>
-              <div class="text-[11px] text-slate-300">Explore live templates, landing scenarios, and analytics.</div>
-            </div>
-
-            <div class="p-4 rounded-2xl glass-card border-slate-700">
-              <div class="text-xs font-mono text-purple-400 font-bold mb-1">03. PILOT EVALUATION</div>
-              <div class="text-xs font-bold text-white mb-2">Enterprise Contact</div>
-              <div class="text-[11px] text-slate-300">Schedule custom template creation or red-team integration.</div>
+            <div class="p-5 rounded-2xl glass-card border-rose-500/40 bg-rose-950/20 space-y-2">
+              <div class="font-bold text-rose-300 flex items-center gap-2"><span>📱</span> The Mobile Reality</div>
+              <p class="text-xs text-rose-200">Personal context, zero spam filters, high urgency, and checked while walking between meetings.</p>
             </div>
           </div>
         </div>
 
-        <div class="flex items-center justify-between text-xs text-slate-400 border-t border-slate-800 pt-3">
-          <div>KCSP WhatsApp Security Awareness Simulation Platform</div>
-          <div class="font-mono text-brand-400">Questions & Answers Welcome</div>
+        <div class="text-xs text-slate-500 border-t border-slate-800 pt-3 flex justify-between">
+          <span>Target Vectors: Smishing, Quishing, Spoofed Executive Notices</span>
+          <span class="text-rose-400 font-mono">Traditional security tools have ZERO WhatsApp coverage</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: THE SHOCKING STATS -->
+      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="3">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-bold">THE METRICS BEHIND THE ATTACK</div>
+          <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-bold border border-brand-500/30">ASYMMETRIC ADVANTAGE</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 my-auto">
+          <div class="p-8 rounded-3xl glass-glow text-center space-y-3">
+            <div class="text-5xl sm:text-6xl font-extrabold text-brand-400">>98%</div>
+            <div class="text-base font-bold text-white">WhatsApp Open Rate</div>
+            <p class="text-xs text-slate-400">Compared to just ~20% on corporate email. Messages are practically guaranteed to be opened.</p>
+          </div>
+
+          <div class="p-8 rounded-3xl glass-glow text-center space-y-3">
+            <div class="text-5xl sm:text-6xl font-extrabold text-cyan-400">< 3 min</div>
+            <div class="text-base font-bold text-white">Average Response Velocity</div>
+            <p class="text-xs text-slate-400">Users react almost immediately to smartphone vibrations with low cognitive skepticism.</p>
+          </div>
+
+          <div class="p-8 rounded-3xl glass-glow text-center space-y-3">
+            <div class="text-5xl sm:text-6xl font-extrabold text-purple-400">0</div>
+            <div class="text-base font-bold text-white">Perimeter Gateways</div>
+            <p class="text-xs text-slate-400">Zero corporate firewalls or email filters stand between a malicious WhatsApp message and your team.</p>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-400 border-t border-slate-800 pt-3 flex justify-between">
+          <span>Why Attackers Love WhatsApp: High Trust + Instant Action</span>
+          <span class="text-brand-400 font-mono">You cannot defend what you cannot simulate</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: THE SOLUTION -->
+      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="4">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-bold">INTRODUCING KCSP</div>
+          <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-bold border border-brand-500/30">THE SOLUTION</span>
+        </div>
+
+        <div class="max-w-3xl my-auto space-y-6">
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+            Realistic mobile drills. <br>
+            <span class="bg-gradient-to-r from-brand-400 to-teal-300 bg-clip-text text-transparent">Zero security risk. Real human resilience.</span>
+          </h2>
+          <p class="text-base sm:text-lg text-slate-300 font-light leading-relaxed">
+            KCSP is the modern platform built for internal security teams and ethical red teams. 
+            Run targeted, realistic WhatsApp awareness simulations, protect your liability with our Zero-Credential Engine, and train employees at the exact second they make a mistake.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            <div class="p-4 rounded-2xl glass-card space-y-2">
+              <div class="text-brand-400 font-mono text-xs font-bold">1. SIMULATE</div>
+              <div class="font-bold text-white text-sm">Targeted & Contextual</div>
+              <p class="text-xs text-slate-400">Personalized templates for IT resets, HR announcements, or urgent payroll notifications.</p>
+            </div>
+            <div class="p-4 rounded-2xl glass-card space-y-2">
+              <div class="text-cyan-400 font-mono text-xs font-bold">2. INTERCEPT</div>
+              <div class="font-bold text-white text-sm">100% Safe Landing</div>
+              <p class="text-xs text-slate-400">Client-side scripts discard sensitive credentials before network transit. No passwords saved.</p>
+            </div>
+            <div class="p-4 rounded-2xl glass-card space-y-2">
+              <div class="text-purple-400 font-mono text-xs font-bold">3. EDUCATE</div>
+              <div class="font-bold text-white text-sm">Instant Debrief</div>
+              <p class="text-xs text-slate-400">Immediate teachable moment card showing the 3 red flags they missed.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-400 border-t border-slate-800 pt-3 flex justify-between">
+          <span>Next.js 14 • Prisma • TypeScript • Docker</span>
+          <span class="text-brand-400 font-mono">100% Open Source</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 5: ZERO-CREDENTIAL KILLER FEATURE -->
+      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="5">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-bold">OUR KILLER FEATURE</div>
+          <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30">ZERO LIABILITY</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 my-auto items-center">
+          <div class="space-y-4">
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+              The Zero-Credential Engine: <br>
+              <span class="text-brand-400">Realism without the liability.</span>
+            </h2>
+            <p class="text-sm text-slate-300 leading-relaxed font-light">
+              Traditional simulation tools create massive legal headaches: what if an employee inputs their real corporate SSO password into your simulation database? 
+              KCSP solves this permanently at the architectural level.
+            </p>
+
+            <div class="space-y-2.5 text-xs sm:text-sm text-slate-300">
+              <div class="p-3 rounded-xl glass-card flex items-start gap-2.5">
+                <span class="text-brand-400 font-bold">✓</span>
+                <span><strong>Client-Side Interception:</strong> The browser DOM hook discards passwords in memory before the request is even dispatched.</span>
+              </div>
+              <div class="p-3 rounded-xl glass-card flex items-start gap-2.5">
+                <span class="text-brand-400 font-bold">✓</span>
+                <span><strong>Binary Telemetry Only:</strong> Backend records strictly <code>INTERACTED = TRUE</code>. Zero plaintext secrets on wire or disk.</span>
+              </div>
+              <div class="p-3 rounded-xl glass-card flex items-start gap-2.5">
+                <span class="text-brand-400 font-bold">✓</span>
+                <span><strong>Legal & Compliance Nirvana:</strong> Fully aligned with union labor laws, GDPR, and ISO 27001 ethics rules.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Payload Preview -->
+          <div class="p-6 rounded-3xl bg-slate-950 border border-brand-500/30 space-y-3 font-mono text-xs shadow-2xl">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800 text-[11px] text-slate-400">
+              <span>// client-wrapper.tsx (In-Browser Sanitizer)</span>
+              <span class="text-brand-400">ACTIVE SHIELD</span>
+            </div>
+            <div class="p-3 bg-slate-900 rounded-xl space-y-1">
+              <span class="text-slate-500">// User inputs:</span>
+              <div class="text-slate-300">user: "elena.rossi@company.com"</div>
+              <div class="text-rose-400">pass: "SuperSecret2026!" ──> [PURGED IN DOM]</div>
+            </div>
+            <div class="text-center text-brand-400 text-[11px] font-bold">
+              ↓ SENT OVER NETWORK TO API ↓
+            </div>
+            <div class="p-3 bg-emerald-950/30 border border-emerald-500/40 rounded-xl space-y-1 text-slate-300">
+              <div>{</div>
+              <div class="pl-4 text-cyan-300">"token": "32_byte_opaque_token",</div>
+              <div class="pl-4 text-emerald-400">"password": "USER_ENTERED_VALUE",</div>
+              <div class="pl-4 text-purple-300">"interaction": true</div>
+              <div>}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-400 border-t border-slate-800 pt-3 flex justify-between">
+          <span>Zero User Credentials Stored Ever</span>
+          <span class="text-brand-400 font-mono">100% Legal Immunity Guaranteed</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 6: TEACHABLE MOMENT -->
+      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="6">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-mono text-amber-400 uppercase tracking-wider font-bold">BEHAVIORAL PSYCHOLOGY</div>
+          <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold border border-amber-500/30">TEACH, DON'T SHAME</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 my-auto items-center">
+          <div class="space-y-4">
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+              The Teachable Moment: <br>
+              <span class="text-amber-400">4x higher learning retention.</span>
+            </h2>
+            <p class="text-sm text-slate-300 leading-relaxed font-light">
+              Sending a disciplinary email 3 days after a drill creates resentment and zero behavioral change. 
+              KCSP triggers an instantaneous educational debrief the millisecond the employee interacts.
+            </p>
+
+            <ul class="space-y-3 text-xs sm:text-sm text-slate-300">
+              <li class="flex items-start gap-2.5">
+                <span class="text-amber-400 font-bold">●</span>
+                <span><strong>Zero Latency:</strong> Feedback happens when cognitive recall is peak.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-amber-400 font-bold">●</span>
+                <span><strong>The 3 Clues:</strong> Highlights the subtle red flags: unexpected WhatsApp channel, spoofed URL domain, and artificial emotional urgency.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-emerald-400 font-bold">●</span>
+                <span><strong>Culture of Proactive Defense:</strong> Turns employees into human firewalls who actively report suspicious activity.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Debrief Card Visual -->
+          <div class="p-6 rounded-3xl bg-white text-slate-900 border-2 border-amber-400 shadow-2xl space-y-3">
+            <div class="flex items-center gap-2.5 pb-2 border-b border-amber-100">
+              <span class="text-2xl">⚠️</span>
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">Security Awareness Drill</span>
+                <h4 class="font-bold text-base text-slate-900">Questa era una simulazione autorizzata!</h4>
+              </div>
+            </div>
+            <p class="text-xs text-slate-600">Nessuna password è stata memorizzata. Ecco cosa avresti potuto notare:</p>
+            <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs space-y-1 text-slate-800">
+              <div><strong>1.</strong> L'IT aziendale non ti scriverà mai su WhatsApp per un reset password.</div>
+              <div><strong>2.</strong> Il link non apparteneva al dominio aziendale ufficiale.</div>
+              <div><strong>3.</strong> Il senso di urgenza artificioso per spingerti ad agire d'impulso.</div>
+            </div>
+            <div class="p-2.5 bg-emerald-50 rounded-xl border border-emerald-200 text-xs font-semibold text-emerald-900">
+              ✓ Prossima volta: Segnala subito il messaggio al team Security!
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-400 border-t border-slate-800 pt-3 flex justify-between">
+          <span>Non-punitive learning beats compliance checklists every time</span>
+          <span class="text-amber-400 font-mono">Immediate Impact</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 7: PLUGGABLE PROVIDERS -->
+      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="7">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-mono text-cyan-400 uppercase tracking-wider font-bold">SOVEREIGN & FLEXIBLE</div>
+          <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-400 text-xs font-bold border border-cyan-500/30">ZERO LOCK-IN</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 my-auto">
+          <div class="p-6 rounded-3xl glass-card space-y-3">
+            <div class="text-3xl">🧪</div>
+            <h3 class="font-bold text-white text-base">Local Mock Provider</h3>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-brand-400 text-[10px] font-mono font-bold">$0 / Zero API Keys</span>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Test campaigns on your laptop in 10 seconds. Simulates deliveries, latency, and participant responses with zero external network calls.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-3xl glass-glow space-y-3">
+            <div class="text-3xl">🌐</div>
+            <h3 class="font-bold text-white text-base">WASenderAPI Gateway</h3>
+            <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 text-[10px] font-mono font-bold">High Scale Cloud</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Turnkey cloud API adapter for sending high-throughput WhatsApp messages with delivery webhooks and bearer authentication.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-3xl glass-card space-y-3">
+            <div class="text-3xl">🏢</div>
+            <h3 class="font-bold text-white text-base">WPPConnect Adapter</h3>
+            <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-400 text-[10px] font-mono font-bold">100% Self-Hosted</span>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Run your own sovereign containerized WhatsApp instance on-premise. Zero third-party data transit. Total control.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-center justify-between text-xs text-amber-300">
+          <span>🛡️ <strong>Auto-Pause Protection:</strong> If WhatsApp logs out, the queue pauses automatically to prevent bans and lost messages.</span>
+          <span class="font-mono text-amber-200">Fail-Safe</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 8: REAL TELEMETRY -->
+      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="8">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-bold">REAL RESILIENCE METRICS</div>
+          <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-bold border border-brand-500/30">DATA THAT MATTERS</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 my-auto">
+          <div class="p-5 rounded-2xl glass-card text-center space-y-1">
+            <div class="text-3xl font-extrabold text-brand-400">98.4%</div>
+            <div class="text-xs font-bold text-white">Delivery Rate</div>
+            <div class="text-[11px] text-slate-400">Webhook verified</div>
+          </div>
+          <div class="p-5 rounded-2xl glass-card text-center space-y-1">
+            <div class="text-3xl font-extrabold text-cyan-400">34.2%</div>
+            <div class="text-xs font-bold text-white">Unique Click Rate</div>
+            <div class="text-[11px] text-slate-400">Distinct employees</div>
+          </div>
+          <div class="p-5 rounded-2xl glass-card text-center space-y-1">
+            <div class="text-3xl font-extrabold text-rose-400">18.5%</div>
+            <div class="text-xs font-bold text-white">Interaction Rate</div>
+            <div class="text-[11px] text-slate-400">Submitted credentials</div>
+          </div>
+          <div class="p-5 rounded-2xl glass-glow text-center space-y-1">
+            <div class="text-3xl font-extrabold text-emerald-400">81.5</div>
+            <div class="text-xs font-bold text-emerald-300">Resilience Score</div>
+            <div class="text-[11px] text-emerald-400">100 - Interaction %</div>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-3xl glass-card space-y-3">
+          <div class="text-xs font-bold text-slate-300 uppercase tracking-wider">Department Vulnerability Ranking</div>
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+            <div class="p-3 bg-slate-900 rounded-xl border border-rose-500/40">
+              <div class="font-bold text-white">Finance & Accounting</div>
+              <div class="text-rose-400 font-mono font-bold mt-1">42% Vulnerable (High Risk)</div>
+            </div>
+            <div class="p-3 bg-slate-900 rounded-xl border border-amber-500/40">
+              <div class="font-bold text-white">Human Resources</div>
+              <div class="text-amber-400 font-mono font-bold mt-1">29% Vulnerable</div>
+            </div>
+            <div class="p-3 bg-slate-900 rounded-xl border border-amber-500/40">
+              <div class="font-bold text-white">Sales & Marketing</div>
+              <div class="text-amber-400 font-mono font-bold mt-1">25% Vulnerable</div>
+            </div>
+            <div class="p-3 bg-slate-900 rounded-xl border border-emerald-500/40">
+              <div class="font-bold text-white">Engineering</div>
+              <div class="text-emerald-400 font-mono font-bold mt-1">6% Vulnerable (Strong)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-400 border-t border-slate-800 pt-3 flex justify-between">
+          <span>Tailor training workshops where risk is actually concentrated</span>
+          <span class="text-brand-400 font-mono">Dual CSV Export Ready</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 9: DEVELOPER FIRST & OPEN SOURCE -->
+      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-slate-950" data-slide="9">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-bold">100% OPEN SOURCE & DEVELOPER FIRST</div>
+          <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-bold border border-brand-500/30">HACKER FRIENDLY</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 my-auto">
+          <div class="p-6 rounded-3xl glass-card space-y-2">
+            <div class="text-2xl">📦</div>
+            <h3 class="font-bold text-white text-base">Clean Monorepo</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Separated packages for <code>@kcsp/engine</code>, <code>@kcsp/whatsapp</code>, <code>@kcsp/tracking</code>, and <code>@kcsp/analytics</code>.</p>
+          </div>
+          <div class="p-6 rounded-3xl glass-card space-y-2">
+            <div class="text-2xl">🐳</div>
+            <h3 class="font-bold text-white text-base">One-Line Docker Deploy</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Turnkey Docker Compose with persistent SQLite WAL storage or drop-in PostgreSQL migration.</p>
+          </div>
+          <div class="p-6 rounded-3xl glass-card space-y-2">
+            <div class="text-2xl">🔌</div>
+            <h3 class="font-bold text-white text-base">Extensible Architecture</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Add your own WhatsApp API gateway or SIEM webhook sink in under 50 lines of TypeScript.</p>
+          </div>
+        </div>
+
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl font-mono text-xs text-slate-300 flex items-center justify-between">
+          <span>$ git clone https://github.com/b1162/kcsp-presentation && npm run demo</span>
+          <span class="text-brand-400">Runs locally in 30 seconds</span>
+        </div>
+      </section>
+
+      <!-- SLIDE 10: GET STARTED & CALL TO ACTION -->
+      <section class="slide absolute inset-0 p-8 sm:p-14 flex flex-col justify-between opacity-0 pointer-events-none z-0 slide-transition bg-gradient-to-br from-slate-950 via-slate-900 to-brand-950/40" data-slide="10">
+        <div class="flex items-center justify-between">
+          <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-bold">JOIN THE MOVEMENT</div>
+          <span class="px-3 py-1 rounded-full bg-brand-500/20 text-brand-400 text-xs font-bold border border-brand-500/30">OPEN FOR EVERYONE</span>
+        </div>
+
+        <div class="max-w-3xl my-auto space-y-6">
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+            Stop hoping your team won't click. <br>
+            <span class="bg-gradient-to-r from-brand-400 to-teal-300 bg-clip-text text-transparent">Start training them on WhatsApp today.</span>
+          </h2>
+          <p class="text-base sm:text-lg text-slate-300 font-light leading-relaxed">
+            KCSP is open source, free to self-host, and ready for your next drill.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            <div class="p-4 rounded-2xl glass-glow space-y-1">
+              <div class="text-xs font-mono text-brand-400 font-bold">01. STAR ON GITHUB</div>
+              <div class="font-bold text-white text-sm">b1162/kcsp-presentation</div>
+              <p class="text-[11px] text-slate-400">Explore code, submit PRs, join the community.</p>
+            </div>
+            <div class="p-4 rounded-2xl glass-card space-y-1">
+              <div class="text-xs font-mono text-cyan-400 font-bold">02. RUN DEMO</div>
+              <div class="font-bold text-white text-sm">npm run demo</div>
+              <p class="text-[11px] text-slate-400">Full 5-user simulated drill in 30 seconds.</p>
+            </div>
+            <div class="p-4 rounded-2xl glass-card space-y-1">
+              <div class="text-xs font-mono text-purple-400 font-bold">03. DEPLOY DOCKER</div>
+              <div class="font-bold text-white text-sm">docker compose up -d</div>
+              <p class="text-[11px] text-slate-400">Production ready with automated HTTPS.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-400 border-t border-slate-800 pt-3 flex justify-between">
+          <span>KCSP Open Source Project // Massimiliano Bozza</span>
+          <span class="text-brand-400 font-mono">Let's build the human firewall together 🚀</span>
         </div>
       </section>
 
     </div>
   </main>
 
-  <!-- BOTTOM CONTROL DOCK -->
-  <footer class="no-print h-16 border-t border-slate-800/80 bg-slate-950/90 backdrop-blur px-6 flex items-center justify-between z-30 shrink-0">
+  <!-- BOTTOM DOCK -->
+  <footer class="no-print h-16 border-t border-slate-800 bg-slate-950/90 backdrop-blur px-6 flex items-center justify-between z-30 shrink-0">
     <div class="flex items-center gap-3">
-      <button onclick="prevSlide()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Previous Slide [←]">
+      <button onclick="prevSlide()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Previous [←]">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       </button>
       <div class="flex items-center gap-1.5 font-mono text-xs text-slate-300 bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800">
         <span id="current-slide-num" class="font-bold text-brand-400">1</span>
         <span class="text-slate-600">/</span>
-        <span id="total-slides-num" class="text-slate-400">12</span>
+        <span id="total-slides-num" class="text-slate-400">10</span>
       </div>
-      <button onclick="nextSlide()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Next Slide [→]">
+      <button onclick="nextSlide()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition" title="Next [→]">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </button>
     </div>
 
-    <!-- PROGRESS BAR -->
     <div class="w-48 sm:w-80 h-1.5 bg-slate-800 rounded-full overflow-hidden">
-      <div id="deck-progress" class="h-full bg-gradient-to-r from-brand-500 to-teal-400 transition-all duration-300" style="width: 8.33%"></div>
+      <div id="deck-progress" class="h-full bg-gradient-to-r from-brand-500 to-teal-400 transition-all duration-300" style="width: 10%"></div>
     </div>
 
-    <!-- SLIDE QUICK SELECTOR -->
-    <div class="flex items-center gap-2">
+    <div>
       <select id="slide-selector" onchange="goToSlide(parseInt(this.value))" class="bg-slate-900 text-slate-300 text-xs font-mono rounded-xl border border-slate-800 px-3 py-1.5 focus:outline-none focus:border-brand-500">
-        <option value="1">01. Title & Introduction</option>
-        <option value="2">02. The Enterprise Threat</option>
-        <option value="3">03. Platform Overview</option>
-        <option value="4">04. System Architecture</option>
-        <option value="5">05. Provider Abstraction</option>
-        <option value="6">06. Campaign Pipeline</option>
-        <option value="7">07. Zero-Credential Safe</option>
-        <option value="8">08. Teachable Moment</option>
-        <option value="9">09. GDPR & Privacy</option>
-        <option value="10">10. Analytics & Scoring</option>
-        <option value="11">11. Docker Deployment</option>
-        <option value="12">12. Summary & CTA</option>
+        <option value="1">01. The Hook: Phishing Moved</option>
+        <option value="2">02. The Blind Spot: Email vs WhatsApp</option>
+        <option value="3">03. Shocking Stats: >98% Open Rate</option>
+        <option value="4">04. The Solution: KCSP</option>
+        <option value="5">05. Killer Feature: Zero-Credential</option>
+        <option value="6">06. Teachable Moment: Instant Debrief</option>
+        <option value="7">07. Pluggable Providers: Zero Lock-In</option>
+        <option value="8">08. Real Telemetry: Resilience Score</option>
+        <option value="9">09. 100% Open Source & Monorepo</option>
+        <option value="10">10. Get Started: Star on GitHub</option>
       </select>
     </div>
   </footer>
 
-  <!-- PRESENTER NOTES DRAWER -->
-  <div id="presenter-drawer" class="no-print fixed bottom-16 right-6 w-96 max-w-[calc(100vw-3rem)] p-5 rounded-3xl glass-card-glow border-brand-500/40 z-40 hidden shadow-2xl space-y-3">
+  <!-- SPEAKER NOTES MODAL -->
+  <div id="notes-modal" class="no-print fixed bottom-16 right-6 w-96 p-5 rounded-3xl glass-glow z-40 hidden shadow-2xl space-y-2">
     <div class="flex items-center justify-between pb-2 border-b border-slate-800">
-      <div class="flex items-center gap-2">
-        <span class="text-brand-400">🎙️</span>
-        <span class="text-xs font-bold uppercase text-white tracking-wider">Presenter Notes</span>
-      </div>
-      <button onclick="togglePresenterNotes()" class="text-slate-400 hover:text-white text-xs">✕</button>
+      <span class="text-xs font-bold uppercase tracking-wider text-brand-400">🎙️ Pitch Notes</span>
+      <button onclick="toggleNotes()" class="text-slate-400 hover:text-white text-xs">✕</button>
     </div>
-    <div id="presenter-notes-content" class="text-xs text-slate-300 leading-relaxed max-h-56 overflow-y-auto custom-scrollbar">
-      Notes will load dynamically based on active slide.
-    </div>
+    <div id="notes-text" class="text-xs text-slate-300 leading-relaxed max-h-48 overflow-y-auto"></div>
   </div>
 
   <script>
-    const speakerNotes = {
-      1: "Welcome everyone. Today we present KCSP: the first enterprise-grade platform built specifically to test and train employee resilience against WhatsApp social engineering. Notice our four pillars: Zero-Credential storage, pluggable WhatsApp providers, teachable moments, and GDPR privacy by design.",
-      2: "Enterprises have spent decades hardening email with Secure Email Gateways. Attackers adapted by jumping directly into WhatsApp. WhatsApp messages enjoy open rates above 98% and average response times under 3 minutes. Employees view WhatsApp as personal and trusted, which creates an enormous blind spot.",
-      3: "KCSP addresses this risk safely. Security teams can run high-fidelity simulations that mirror modern attacks without any operational risk. Every component is built for production enterprise reliability.",
-      4: "Our architecture is an enterprise modular monolith. The web app powers the admin console and public endpoints. Clean packages isolate the queue engine, WhatsApp providers, tracking services, and analytics.",
-      5: "Zero vendor lock-in: Teams can run local testing for $0 using our built-in Mock Provider without any API keys. In production, switch seamlessly to WASender or self-hosted WPPConnect with automatic pause fail-safes.",
-      6: "Campaign execution takes under 2 minutes: segment participants, choose a personalized template with variables like first_name and department, and let the asynchronous queue handle delivery with anti-ban jitter.",
-      7: "Our biggest safety differentiator: The Zero-Credential engine. Form submissions on simulation pages are intercepted client-side in the browser. Passwords and pins are permanently discarded. The server only logs that an interaction occurred. Zero legal exposure.",
-      8: "Instead of punishing employees, KCSP turns mistakes into teachable moments. The simulation morphs immediately into an educational debrief card explaining the three red flags they missed.",
-      9: "Compliance is paramount in Europe and globally. KCSP uses 32-byte opaque tracking tokens with zero PII in links, HMAC SHA-256 IP/User-Agent hashing with dynamic salt, and one-click GDPR participant anonymization.",
-      10: "In the Admin Console, CISOs access live telemetry: delivery rates, unique clicks vs total clicks, department vulnerability rankings, and our proprietary human Resilience Score.",
-      11: "DevOps ready: Deploys in minutes with Docker Compose, automated Caddy HTTPS, and your choice of persistent SQLite WAL mode or seamless migration to Managed PostgreSQL.",
-      12: "Wrap-up and call to action: Run npm run demo locally right now to see the full lifecycle in 30 seconds, explore the admin dashboard, or contact us for an enterprise pilot."
+    const notes = {
+      1: "Hey everyone! Today we're showing KCSP. For decades, security companies sold expensive email filters. But cybercriminals moved straight to WhatsApp. KCSP is the open-source resilience platform designed for where modern attacks actually happen.",
+      2: "Email is hardened by multi-million dollar gateways. Attackers don't bother fighting DMARC when they can message your developers or payroll team directly on WhatsApp. This is the biggest unmonitored blind spot in cyber.",
+      3: "The numbers are crazy: WhatsApp has an open rate above 98%, and average response times under 3 minutes. And there is ZERO perimeter defense.",
+      4: "KCSP gives teams realistic simulations, zero credential storage liability, and instant teachable moments. It's built in Next.js 14 and TypeScript.",
+      5: "Our killer differentiator: Zero-Credential DOM Interception. We purge passwords directly in the user's browser before the HTTP request leaves. We record that they interacted, but we never touch their secrets. Zero liability.",
+      6: "Instead of shaming employees days later, we deliver immediate educational debriefs the millisecond they click, boosting learning retention by 4 times.",
+      7: "Zero vendor lock-in. Run locally with the Mock Provider for $0, use cloud APIs, or self-host private WhatsApp instances with WPPConnect.",
+      8: "Real metrics: Unique clickers, interaction rates, and our proprietary Resilience Score. You can pinpoint which departments need help.",
+      9: "We believe this should be open source. Clean monorepo, Docker Compose ready, and easily extensible with your own adapters.",
+      10: "Join us, star the repo on GitHub, and try the local demo drill right now in 30 seconds."
     };
 
-    let currentSlide = 1;
-    const totalSlides = 12;
+    let current = 1;
+    const total = 10;
     const slides = document.querySelectorAll('.slide');
-    const slideSelector = document.getElementById('slide-selector');
-    const currentSlideNum = document.getElementById('current-slide-num');
-    const progressBar = document.getElementById('deck-progress');
-    const notesContent = document.getElementById('presenter-notes-content');
-    const presenterDrawer = document.getElementById('presenter-drawer');
 
-    function updateSlide() {
+    function update() {
       slides.forEach(s => {
         const num = parseInt(s.getAttribute('data-slide'));
-        if (num === currentSlide) {
+        if (num === current) {
           s.classList.remove('opacity-0', 'pointer-events-none');
           s.classList.add('opacity-100', 'z-10');
         } else {
@@ -1005,85 +623,29 @@
           s.classList.add('opacity-0', 'pointer-events-none');
         }
       });
-
-      if (currentSlideNum) currentSlideNum.textContent = currentSlide;
-      if (slideSelector) slideSelector.value = currentSlide;
-      if (progressBar) progressBar.style.width = `${(currentSlide / totalSlides) * 100}%`;
-      if (notesContent) notesContent.textContent = speakerNotes[currentSlide] || "No notes for this slide.";
+      document.getElementById('current-slide-num').textContent = current;
+      document.getElementById('slide-selector').value = current;
+      document.getElementById('deck-progress').style.width = `${(current / total) * 100}%`;
+      document.getElementById('notes-text').textContent = notes[current];
     }
 
-    function nextSlide() {
-      if (currentSlide < totalSlides) {
-        currentSlide++;
-        updateSlide();
-      }
-    }
-
-    function prevSlide() {
-      if (currentSlide > 1) {
-        currentSlide--;
-        updateSlide();
-      }
-    }
-
-    function goToSlide(num) {
-      if (num >= 1 && num <= totalSlides) {
-        currentSlide = num;
-        updateSlide();
-      }
-    }
-
-    function togglePresenterNotes() {
-      if (presenterDrawer) {
-        presenterDrawer.classList.toggle('hidden');
-      }
-    }
-
+    function nextSlide() { if (current < total) { current++; update(); } }
+    function prevSlide() { if (current > 1) { current--; update(); } }
+    function goToSlide(n) { if (n >= 1 && n <= total) { current = n; update(); } }
+    function toggleNotes() { document.getElementById('notes-modal').classList.toggle('hidden'); }
     function toggleFullscreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
-      }
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
     }
 
-    // Keyboard navigation
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
-        e.preventDefault();
-        nextSlide();
-      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        e.preventDefault();
-        prevSlide();
-      } else if (e.key === 'Home') {
-        e.preventDefault();
-        goToSlide(1);
-      } else if (e.key === 'End') {
-        e.preventDefault();
-        goToSlide(totalSlides);
-      } else if (e.key === 'n' || e.key === 'N') {
-        togglePresenterNotes();
-      } else if (e.key === 'f' || e.key === 'F') {
-        toggleFullscreen();
-      }
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+      else if (e.key === 'n' || e.key === 'N') toggleNotes();
+      else if (e.key === 'f' || e.key === 'F') toggleFullscreen();
     });
 
-    // Touch swipe support
-    let touchStartX = 0;
-    window.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    window.addEventListener('touchend', e => {
-      const diff = e.changedTouches[0].screenX - touchStartX;
-      if (diff < -50) nextSlide();
-      if (diff > 50) prevSlide();
-    }, { passive: true });
-
-    // Initial setup
-    updateSlide();
+    update();
   </script>
 </body>
 </html>
