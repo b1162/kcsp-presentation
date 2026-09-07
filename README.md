@@ -2,6 +2,7 @@
 ## Documentation, Interactive Presentation Deck & Video Pitch Suite
 
 [![Live Showcase](https://img.shields.io/badge/Live_Showcase-GitHub_Pages-10b981?style=for-the-badge&logo=github)](https://b1162.github.io/kcsp-presentation/)
+[![GitHub Gist](https://img.shields.io/badge/GitHub_Gist-Documentation-purple?style=for-the-badge&logo=github)](https://gist.github.com/b1162/d5ba7265c106ebdf9dd2a6a417fd2355)
 [![Video Pitch](https://img.shields.io/badge/Video_Pitch-1080p_HD-34d399?style=for-the-badge&logo=youtube)](kcsp_platform_pitch.mp4)
 [![License](https://img.shields.io/badge/License-Proprietary_Security_Awareness-06b6d4?style=for-the-badge)](docs/security-and-gdpr.md)
 
@@ -22,6 +23,7 @@ This repository hosts the **public documentation, interactive slide presentation
 | Resource | Description | Live Access |
 | :--- | :--- | :--- |
 | 🌐 **Master Showcase Portal** | All-in-one portal embedding slides, video player, screenshot gallery, and technical docs | [Launch Portal](index.html) |
+| 📋 **GitHub Gist Documentation** | Standalone multi-file Gist bundle with architecture, GDPR, and slides | [View Gist](https://gist.github.com/b1162/d5ba7265c106ebdf9dd2a6a417fd2355) |
 | 📊 **Interactive 16:9 Slide Deck** | 12-slide presentation with speaker notes (`N`), fullscreen (`F`), and print-to-PDF | [Launch Slides](slides.html) |
 | 🎬 **Video Pitch Player** | Synchronized audio voiceover, 8 storyboard chapters, timeline seeking, and subtitles | [Launch Video Player](video.html) |
 | 🖼️ **Live App Walkthrough** | 11 production UI screenshots with architectural feature breakdowns and route details | [Launch Screenshot Tour](walkthrough.html) |
