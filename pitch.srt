@@ -1,0 +1,119 @@
+1
+00:00:00,500 --> 00:00:06,000
+For years, enterprises have poured millions into securing corporate email.
+
+2
+00:00:06,200 --> 00:00:11,500
+Firewalls, secure email gateways, and endless phishing drills.
+
+3
+00:00:11,800 --> 00:00:15,200
+But cybercriminals have evolved.
+
+4
+00:00:15,500 --> 00:00:21,500
+Today, the most dangerous attacks bypass corporate inboxes entirely,
+
+5
+00:00:21,700 --> 00:00:27,800
+landing directly on employees' personal and work smartphones via WhatsApp.
+
+6
+00:00:28,000 --> 00:00:32,800
+With open rates exceeding 98% and response times under 3 minutes,
+
+7
+00:00:33,000 --> 00:00:37,200
+mobile messaging has become the enterprise's greatest blind spot.
+
+8
+00:00:37,800 --> 00:00:41,200
+Meet KCSP: the enterprise-grade WhatsApp
+
+9
+00:00:41,400 --> 00:00:45,500
+Security Awareness Simulation Platform.
+
+10
+00:00:45,800 --> 00:00:50,000
+KCSP empowers security teams to run realistic, controlled mobile simulations,
+
+11
+00:00:50,300 --> 00:00:54,800
+safely train employees at the exact moment of risk,
+
+12
+00:00:55,000 --> 00:00:59,800
+and measure organizational human resilience in real time.
+
+13
+00:01:00,200 --> 00:01:04,800
+It starts with our modular, provider-independent architecture.
+
+14
+00:01:05,000 --> 00:01:09,500
+Test instantly with zero cost using our local Mock Provider,
+
+15
+00:01:09,800 --> 00:01:15,200
+or scale with production gateways like WASender API and self-hosted WPPConnect.
+
+16
+00:01:15,600 --> 00:01:20,000
+Security officers create targeted campaigns across departments,
+
+17
+00:01:20,200 --> 00:01:24,500
+dispatched through an asynchronous queue with built-in rate limiting
+
+18
+00:01:24,700 --> 00:01:28,800
+and anti-spam jitter protection.
+
+19
+00:01:29,200 --> 00:01:34,200
+Each participant receives a unique 32-byte opaque tracking link
+
+20
+00:01:34,400 --> 00:01:38,000
+with zero personal data exposed.
+
+21
+00:01:38,400 --> 00:01:43,000
+When they open the high-fidelity Microsoft 365 or HR simulation page,
+
+22
+00:01:43,200 --> 00:01:47,500
+KCSP's Zero-Credential Engine immediately intercepts the form.
+
+23
+00:01:47,800 --> 00:01:53,000
+Passwords and sensitive secrets are strictly discarded right in the browser.
+
+24
+00:01:53,400 --> 00:01:57,800
+Instead of shaming, the screen transforms into an educational debrief,
+
+25
+00:01:58,000 --> 00:02:02,500
+highlighting the three red flags they missed.
+
+26
+00:02:03,000 --> 00:02:07,500
+In the Admin Console, CISOs access live telemetry:
+
+27
+00:02:07,700 --> 00:02:12,000
+delivery rates, unique clicks, and department vulnerability heatmaps,
+
+28
+00:02:12,200 --> 00:02:16,800
+backed by HMAC SHA-256 hashing and GDPR one-click anonymization.
+
+29
+00:02:17,200 --> 00:02:22,000
+Deployable anywhere in minutes with Docker and Caddy HTTPS.
+
+30
+00:02:22,400 --> 00:02:27,500
+Close your mobile perimeter. Strengthen your human firewall with KCSP.

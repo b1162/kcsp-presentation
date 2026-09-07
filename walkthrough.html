@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KCSP Platform — Live App Walkthrough & Screenshot Gallery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans bg-slate-950 select-none overflow-x-hidden">
+
+  <!-- TOP HEADER -->
+  <header class="h-16 border-b border-slate-800 bg-slate-950/90 backdrop-blur px-6 flex items-center justify-between z-20 shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-slate-950 font-bold text-base shadow-lg shadow-brand-500/20">
+        🛡️
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-extrabold text-sm tracking-wider uppercase text-white">KCSP Platform</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-500/10 text-brand-400 border border-brand-500/30">APP WALKTHROUGH & SCREENSHOTS</span>
+        </div>
+        <p class="text-xs text-slate-400">Interactive Tour of the Production Admin Console & Simulation Pages</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+        Slides Presentation
+      </a>
+      <a href="video_pitch_player.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 border border-slate-700 transition">
+        Video Pitch
+      </a>
+      <a href="http://localhost:3000/login" target="_blank" class="px-3 py-1.5 rounded-xl bg-brand-500 hover:bg-brand-400 text-xs font-bold text-slate-950 transition flex items-center gap-1.5">
+        <span>Open Live App</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN WALKTHROUGH CONTENT -->
+  <main class="flex-1 flex flex-col lg:flex-row p-4 sm:p-6 gap-6 max-w-7xl mx-auto w-full overflow-hidden">
+    
+    <!-- LEFT: SCREENSHOT VIEWER & ANNOTATIONS -->
+    <div class="flex-1 flex flex-col gap-4">
+      
+      <!-- SCREENSHOT DISPLAY CANVAS -->
+      <div class="w-full bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden relative shadow-2xl flex flex-col group">
+        
+        <div class="p-3 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+            <span id="screen-url-badge" class="font-mono text-slate-400 ml-2">http://localhost:3000/dashboard</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="screen-category-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400">ADMIN CONSOLE</span>
+            <button onclick="openFullImage()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition" title="View Full Resolution">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="relative bg-slate-950 flex items-center justify-center p-2 min-h-[480px]">
+          <img id="main-screenshot-img" src="screenshots/01_dashboard.png" alt="KCSP Screenshot" class="w-full h-auto object-contain rounded-xl shadow-lg border border-slate-800 transition duration-200">
+        </div>
+
+        <div class="p-4 bg-slate-950/90 border-t border-slate-800 flex items-center justify-between">
+          <div>
+            <h3 id="screen-title" class="font-bold text-sm text-white">Executive Resilience Dashboard</h3>
+            <p id="screen-desc" class="text-xs text-slate-400 mt-0.5">Real-time overview of active campaigns, human resilience score, WhatsApp gateway status, and recent audit logs.</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="prevScreen()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition">Previous</button>
+            <button onclick="nextScreen()" class="px-3 py-1.5 rounded-xl bg-brand-500 hover:bg-brand-400 text-xs font-bold text-slate-950 transition">Next Screen</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- HIGHLIGHTED FEATURES OF CURRENT SCREEN -->
+      <div class="p-5 rounded-2xl glass-panel space-y-3">
+        <h4 class="text-xs font-mono text-brand-400 uppercase tracking-wider font-bold">Key Architectural Features Visible on this Screen:</h4>
+        <div id="screen-features-list" class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-300">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: NAVIGATION DRAWER / ALL SCREENS -->
+    <div class="w-full lg:w-96 flex flex-col gap-3 shrink-0">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xs font-mono text-slate-400 uppercase tracking-wider font-bold">Platform Screen Tour</h2>
+        <span class="text-xs text-brand-400 font-mono">11 Captures</span>
+      </div>
+
+      <div id="screens-menu" class="flex-1 overflow-y-auto space-y-2.5 custom-scrollbar pr-1 max-h-[640px]">
+        <!-- Screen cards generated dynamically -->
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const screens = [
+      {
+        id: 0,
+        title: "Admin Portal Authentication",
+        category: "SECURITY & ACCESS",
+        url: "http://localhost:3000/login",
+        img: "screenshots/00_login.png",
+        desc: "Secure role-based authentication portal with bcrypt password verification and pre-seeded demonstration credentials.",
+        features: [
+          "Bcrypt Password Hash Verification",
+          "Hardened Session Cookies & JWT",
+          "Automated USER_LOGIN Audit Ledger"
+        ]
+      },
+      {
+        id: 1,
+        title: "Executive Resilience Dashboard",
+        category: "ANALYTICS & KPI",
+        url: "http://localhost:3000/dashboard",
+        img: "screenshots/01_dashboard.png",
+        desc: "Unified operational cockpit showing active campaigns, organizational human resilience score, WhatsApp gateway connectivity, and immutable audit logs.",
+        features: [
+          "Resilience Score (100 - Interaction Rate)",
+          "Live WASender & WPPConnect Session Probes",
+          "Active Outbound Queue Metrics"
+        ]
+      },
+      {
+        id: 2,
+        title: "Simulation Campaigns Management",
+        category: "CAMPAIGN ENGINE",
+        url: "http://localhost:3000/campaigns",
+        img: "screenshots/02_campaigns.png",
+        desc: "Overview of all active, scheduled, and past security drills with one-click campaign launch and status monitoring.",
+        features: [
+          "Status Filtering (Draft, Running, Completed)",
+          "Target Participant Counts & Delivery Ratios",
+          "Instant Campaign Creation Modal"
+        ]
+      },
+      {
+        id: 3,
+        title: "Detailed Campaign Telemetry & Drill",
+        category: "TELEMETRY & LOGS",
+        url: "http://localhost:3000/campaigns/[id]",
+        img: "screenshots/03_campaign_detail.png",
+        desc: "Deep-dive view into an individual campaign drill, tracking unique clicks, participant conversion funnels, and department risk distributions.",
+        features: [
+          "Granular Delivery & Click Funnel",
+          "Department Breakdown (e.g. Engineering 100%, Finance 0%)",
+          "Direct Test Link & Simulation Preview"
+        ]
+      },
+      {
+        id: 4,
+        title: "Participant Roster & GDPR Actions",
+        category: "GDPR & PRIVACY",
+        url: "http://localhost:3000/participants",
+        img: "screenshots/04_participants.png",
+        desc: "Directory of enrolled employees segmented by department, featuring CSV batch import and one-click GDPR anonymization.",
+        features: [
+          "Department Tagging (Finance, HR, IT, Legal)",
+          "1-Click GDPR Right-to-Erasure Anonymize",
+          "CSV Import & Phone Masking"
+        ]
+      },
+      {
+        id: 5,
+        title: "Dynamic WhatsApp Message Templates",
+        category: "CONTENT BUILDER",
+        url: "http://localhost:3000/templates",
+        img: "screenshots/05_templates.png",
+        desc: "Customizable WhatsApp notification templates with intelligent variable placeholders for contextual social engineering simulations.",
+        features: [
+          "Dynamic Tags: {{first_name}}, {{department}}",
+          "Opaque Tracking Link Injection: {{tracking_url}}",
+          "IT Alert, HR Policy, and Payroll Presets"
+        ]
+      },
+      {
+        id: 6,
+        title: "Simulation Landing Scenarios",
+        category: "SIMULATION PAGES",
+        url: "http://localhost:3000/landing-pages",
+        img: "screenshots/06_landing_pages.png",
+        desc: "High-fidelity controlled landing pages mimicking enterprise Single Sign-On, policy portals, and urgent notifications.",
+        features: [
+          "Microsoft 365 SSO Identity Portal",
+          "HR Policy Acknowledgment Simulation",
+          "Client-Side Form Interception Hooks"
+        ]
+      },
+      {
+        id: 7,
+        title: "Outbound Dispatch Job Queue",
+        category: "EXECUTION ENGINE",
+        url: "http://localhost:3000/queue",
+        img: "screenshots/07_queue.png",
+        desc: "Asynchronous job queue handling message delivery with rate-limiting intervals, concurrency controls, and anti-ban jitter.",
+        features: [
+          "Rate Limiting to Prevent Provider Bans",
+          "Automatic Queue Pause on Disconnect",
+          "Exponential Backoff Retries & Idempotency"
+        ]
+      },
+      {
+        id: 8,
+        title: "Advanced Analytics & Risk Heatmaps",
+        category: "RISK INTELLIGENCE",
+        url: "http://localhost:3000/analytics",
+        img: "screenshots/08_analytics.png",
+        desc: "Cross-campaign aggregate telemetry, department vulnerability rankings, and dual CSV export options (administrative vs anonymized).",
+        features: [
+          "Department Vulnerability Risk Rankings",
+          "Unique vs Repeated Click Rate Analysis",
+          "Dual CSV Export (Admin & Anonymized)"
+        ]
+      },
+      {
+        id: 9,
+        title: "Controlled Simulation Landing Page",
+        category: "ZERO-CREDENTIAL DOM",
+        url: "http://localhost:3000/s/[token]",
+        img: "screenshots/09_simulation_landing.png",
+        desc: "Pixel-perfect Microsoft 365 credential verification simulation. Client-side form interception strictly scrubs passwords before network transit.",
+        features: [
+          "High-Fidelity M365 Corporate Branding",
+          "Opaque URL Token (Zero Personal Data)",
+          "DOM Password Scrubber (Zero Credential Storage)"
+        ]
+      },
+      {
+        id: 10,
+        title: "The Teachable Moment — Debrief Card",
+        category: "BEHAVIORAL LEARNING",
+        url: "http://localhost:3000/s/[token] (Debrief)",
+        img: "screenshots/10_simulation_debrief.png",
+        desc: "Instant educational debrief displayed immediately upon interaction, explaining the 3 subtle red flags missed in the drill.",
+        features: [
+          "Zero-Latency Teachable Moment (4x Retention)",
+          "3 Subtle Warning Indicators Explained",
+          "Positive, Non-Punitive Cyber Hygiene Guidance"
+        ]
+      }
+    ];
+
+    let currentIdx = 1; // Default to Dashboard
+
+    function renderMenu() {
+      const container = document.getElementById('screens-menu');
+      container.innerHTML = '';
+      screens.forEach((sc, idx) => {
+        const item = document.createElement('div');
+        item.className = `p-3 rounded-2xl glass-panel border transition cursor-pointer flex items-center justify-between ${idx === currentIdx ? 'border-brand-500/80 bg-slate-900/90' : 'border-slate-800/80 hover:border-slate-700'}`;
+        item.onclick = () => selectScreen(idx);
+        item.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded-xl bg-slate-800 text-xs font-mono font-bold flex items-center justify-center ${idx === currentIdx ? 'text-brand-400' : 'text-slate-400'}">
+              ${idx}
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">${sc.title}</div>
+              <div class="text-[10px] text-slate-400 font-mono">${sc.category}</div>
+            </div>
+          </div>
+          <span class="text-[10px] text-slate-500">→</span>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function selectScreen(idx) {
+      currentIdx = idx;
+      const sc = screens[currentIdx];
+
+      document.getElementById('main-screenshot-img').src = sc.img;
+      document.getElementById('screen-title').textContent = sc.title;
+      document.getElementById('screen-desc').textContent = sc.desc;
+      document.getElementById('screen-url-badge').textContent = sc.url;
+      document.getElementById('screen-category-badge').textContent = sc.category;
+
+      const featContainer = document.getElementById('screen-features-list');
+      featContainer.innerHTML = '';
+      sc.features.forEach(f => {
+        const card = document.createElement('div');
+        card.className = 'p-3 rounded-xl bg-slate-900/90 border border-slate-800 flex items-start gap-2';
+        card.innerHTML = `<span class="text-brand-400 font-bold">✓</span><span>${f}</span>`;
+        featContainer.appendChild(card);
+      });
+
+      renderMenu();
+    }
+
+    function nextScreen() {
+      if (currentIdx < screens.length - 1) {
+        selectScreen(currentIdx + 1);
+      }
+    }
+
+    function prevScreen() {
+      if (currentIdx > 0) {
+        selectScreen(currentIdx - 1);
+      }
+    }
+
+    function openFullImage() {
+      window.open(screens[currentIdx].img, '_blank');
+    }
+
+    // Keyboard shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextScreen();
+      if (e.key === 'ArrowLeft') prevScreen();
+    });
+
+    // Initialize
+    selectScreen(1);
+  </script>
+</body>
+</html>

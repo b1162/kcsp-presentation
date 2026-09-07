@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KCSP Video Pitch & Interactive Walkthrough</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans bg-slate-950 select-none overflow-x-hidden">
+
+  <!-- TOP NAV -->
+  <header class="h-16 border-b border-slate-800 bg-slate-950/90 backdrop-blur px-6 flex items-center justify-between z-20 shrink-0">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-slate-950 font-bold text-base shadow-lg shadow-brand-500/20">
+        🛡️
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-extrabold text-sm tracking-wider uppercase text-white">KCSP Platform</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-500/10 text-brand-400 border border-brand-500/30">VIDEO PITCH & DEMO</span>
+        </div>
+        <p class="text-xs text-slate-400">WhatsApp Security Awareness Simulation Platform</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+        <span>Open Interactive Slides</span>
+      </a>
+      <a href="kcsp_platform_pitch.mp4" download class="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-brand-500/20 hover:bg-brand-500/30 text-brand-300 border border-brand-500/40 text-xs font-semibold transition">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>Download MP4 Video</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN VIDEO EXPERIENCE -->
+  <main class="flex-1 flex flex-col lg:flex-row p-4 sm:p-6 gap-6 max-w-7xl mx-auto w-full overflow-hidden">
+    
+    <!-- LEFT: VIDEO PLAYER / VISUAL STAGE -->
+    <div class="flex-1 flex flex-col gap-4">
+      
+      <!-- PLAYER CANVAS (16:9) -->
+      <div id="video-canvas" class="w-full aspect-video bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden relative shadow-2xl flex flex-col justify-between">
+        
+        <!-- Video Mode Switcher (MP4 vs Interactive Simulator) -->
+        <div class="absolute top-4 right-4 z-30 flex items-center gap-1.5 bg-slate-950/80 backdrop-blur border border-slate-800 p-1 rounded-xl">
+          <button id="btn-mode-interactive" onclick="setPlayerMode('interactive')" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-brand-500 text-slate-950 transition">Interactive Walkthrough</button>
+          <button id="btn-mode-mp4" onclick="setPlayerMode('mp4')" class="px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition">Rendered HD MP4</button>
+        </div>
+
+        <!-- RENDERED MP4 CONTAINER (HIDDEN BY DEFAULT) -->
+        <div id="mp4-container" class="hidden absolute inset-0 z-20 bg-black flex items-center justify-center">
+          <video id="mp4-video" controls class="w-full h-full object-contain" src="kcsp_platform_pitch.mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+
+        <!-- INTERACTIVE SIMULATOR STAGE -->
+        <div id="interactive-stage" class="absolute inset-0 z-10 flex items-center justify-center p-6 bg-slate-950">
+          <img id="stage-slide-img" src="frames/slide_01.png" alt="Slide Frame" class="max-w-full max-h-full object-contain rounded-2xl shadow-xl border border-slate-800/80">
+        </div>
+
+        <!-- SUBTITLES OVERLAY -->
+        <div id="captions-overlay" class="absolute bottom-16 left-6 right-6 z-20 flex justify-center pointer-events-none">
+          <div id="caption-text" class="px-5 py-2.5 rounded-2xl bg-slate-950/90 backdrop-blur border border-slate-700/80 text-center text-sm sm:text-base font-medium text-slate-100 max-w-2xl shadow-2xl">
+            Welcome to the KCSP WhatsApp Security Awareness Platform Pitch.
+          </div>
+        </div>
+
+        <!-- BOTTOM VIDEO CONTROLS BAR -->
+        <div class="absolute bottom-0 inset-x-0 h-14 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent px-4 flex items-center justify-between z-30">
+          <div class="flex items-center gap-3">
+            <button id="btn-play-pause" onclick="togglePlay()" class="p-2 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 transition shadow-lg">
+              <svg id="icon-play" class="w-4 h-4 fill-current" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <svg id="icon-pause" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </button>
+            <div class="text-xs font-mono text-slate-300">
+              <span id="time-current">00:00</span> <span class="text-slate-600">/</span> <span id="time-total">03:22</span>
+            </div>
+          </div>
+
+          <!-- Scrubbing Timeline -->
+          <div class="flex-1 mx-4">
+            <input id="timeline-slider" type="range" min="0" max="100" value="0" oninput="seekVideo(this.value)" class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-500">
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="toggleCaptions()" id="btn-cc" class="px-2 py-1 rounded-lg bg-slate-800 text-brand-400 border border-slate-700 text-xs font-bold" title="Toggle Captions">CC</button>
+            <button onclick="toggleFullscreenCanvas()" class="p-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition" title="Fullscreen">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- AUDIO ELEMENT FOR SCENE PLAYBACK -->
+      <audio id="audio-player" preload="auto"></audio>
+
+      <!-- SCENE DESCRIPTION BOX -->
+      <div class="p-4 rounded-2xl glass-panel flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="active-scene-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">SCENE 1</span>
+            <h3 id="active-scene-title" class="font-bold text-sm text-white">The Enterprise Blind Spot</h3>
+          </div>
+          <p id="active-scene-desc" class="text-xs text-slate-400 mt-1">Why cybercriminals shifted away from hardened corporate email straight into WhatsApp messaging.</p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="prevScene()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 transition">Previous</button>
+          <button onclick="nextScene()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 transition">Next</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: SCENE SELECTOR & FEATURE CUES -->
+    <div class="w-full lg:w-96 flex flex-col gap-3 shrink-0">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xs font-mono text-slate-400 uppercase tracking-wider font-bold">Storyboard Chapters</h2>
+        <span class="text-xs text-brand-400 font-mono">8 Scenes</span>
+      </div>
+
+      <div id="scene-list" class="flex-1 overflow-y-auto space-y-2.5 custom-scrollbar pr-1 max-h-[560px]">
+        <!-- Scene items generated dynamically -->
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const scenes = [
+      {
+        id: 1,
+        title: "The Enterprise Blind Spot",
+        subtitle: "Corporate Email vs. WhatsApp Reality",
+        tag: "VECTOR RISK",
+        color: "rose",
+        audio: "audio/scene_01.mp3",
+        frame: "frames/slide_01.png",
+        duration: 26.55,
+        caption: "For years, enterprises have poured millions into securing corporate email. But cybercriminals have evolved. With open rates over 98%, WhatsApp is the enterprise's greatest blind spot."
+      },
+      {
+        id: 2,
+        title: "Introducing KCSP",
+        subtitle: "Authorized WhatsApp Simulation Platform",
+        tag: "ENTERPRISE",
+        color: "emerald",
+        audio: "audio/scene_02.mp3",
+        frame: "frames/slide_02.png",
+        duration: 18.81,
+        caption: "Meet KCSP: the enterprise-grade WhatsApp Security Awareness Simulation Platform. Safely train employees at the exact moment of risk, and measure organizational human resilience in real time."
+      },
+      {
+        id: 3,
+        title: "Provider Abstraction",
+        subtitle: "Mock, WASender & WPPConnect",
+        tag: "FLEXIBILITY",
+        color: "cyan",
+        audio: "audio/scene_03.mp3",
+        frame: "frames/slide_03.png",
+        duration: 26.65,
+        caption: "A modular, provider-independent architecture. Test locally for $0 with the Mock Provider, or switch to WASender API and self-hosted WPPConnect with automatic session fail-safes."
+      },
+      {
+        id: 4,
+        title: "Campaign Orchestration",
+        subtitle: "Rate Limiting, Jitter & Retries",
+        tag: "PIPELINE",
+        color: "purple",
+        audio: "audio/scene_04.mp3",
+        frame: "frames/slide_04.png",
+        duration: 24.92,
+        caption: "Import participants via CSV with departmental tagging. The engine manages an asynchronous queue with rate limiting, anti-spam jitter, and guaranteed idempotency."
+      },
+      {
+        id: 5,
+        title: "Zero-Credential Engine",
+        subtitle: "Client-Side DOM Sanitization",
+        tag: "ETHICAL SHIELD",
+        color: "emerald",
+        audio: "audio/scene_05.mp3",
+        frame: "frames/slide_05.png",
+        duration: 31.58,
+        caption: "High-fidelity simulation landing pages intercept credentials client-side. Passwords and secrets are strictly discarded in the browser. Zero credentials are ever stored."
+      },
+      {
+        id: 6,
+        title: "The Teachable Moment",
+        subtitle: "Immediate Educational Debrief",
+        tag: "POSITIVE LEARNING",
+        color: "amber",
+        audio: "audio/scene_06.mp3",
+        frame: "frames/slide_06.png",
+        duration: 26.42,
+        caption: "Instead of shaming, KCSP transforms interactions into an immediate educational debrief card, highlighting the 3 warning signs missed and increasing retention by 4x."
+      },
+      {
+        id: 7,
+        title: "Analytics & GDPR Privacy",
+        subtitle: "Department Heatmaps & Anonymization",
+        tag: "BOARDROOM INTEL",
+        color: "emerald",
+        audio: "audio/scene_07.mp3",
+        frame: "frames/slide_07.png",
+        duration: 26.72,
+        caption: "Access rich real-time telemetry: delivery rates, unique clicks, and department vulnerability heatmaps. 1-click GDPR anonymization purges PII while preserving statistics."
+      },
+      {
+        id: 8,
+        title: "Docker Deployment & CTA",
+        subtitle: "Turnkey Setup & Instant Demo",
+        tag: "PRODUCTION",
+        color: "cyan",
+        audio: "audio/scene_08.mp3",
+        frame: "frames/slide_08.png",
+        duration: 19.85,
+        caption: "Deploy in minutes with Docker Compose, automated Caddy HTTPS, and SQLite or PostgreSQL. Close your mobile perimeter. Strengthen your human firewall with KCSP."
+      }
+    ];
+
+    let currentSceneIdx = 0;
+    let isPlaying = false;
+    let captionsEnabled = true;
+    const audioPlayer = document.getElementById('audio-player');
+    const stageImg = document.getElementById('stage-slide-img');
+    const captionText = document.getElementById('caption-text');
+    const btnPlayPause = document.getElementById('btn-play-pause');
+    const iconPlay = document.getElementById('icon-play');
+    const iconPause = document.getElementById('icon-pause');
+    const timeCurrent = document.getElementById('time-current');
+    const timeTotal = document.getElementById('time-total');
+    const timelineSlider = document.getElementById('timeline-slider');
+    const sceneListContainer = document.getElementById('scene-list');
+
+    function renderSceneList() {
+      sceneListContainer.innerHTML = '';
+      scenes.forEach((sc, idx) => {
+        const item = document.createElement('div');
+        item.className = `p-3 rounded-2xl glass-panel border transition cursor-pointer flex items-center justify-between ${idx === currentSceneIdx ? 'border-brand-500/80 bg-slate-900/90' : 'border-slate-800/80 hover:border-slate-700'}`;
+        item.onclick = () => loadScene(idx, true);
+        item.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-7 h-7 rounded-xl bg-slate-800 text-xs font-mono font-bold flex items-center justify-center ${idx === currentSceneIdx ? 'text-brand-400' : 'text-slate-400'}">
+              ${idx + 1}
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">${sc.title}</div>
+              <div class="text-[11px] text-slate-400">${sc.subtitle}</div>
+            </div>
+          </div>
+          <span class="text-[10px] font-mono text-slate-500">${Math.round(sc.duration)}s</span>
+        `;
+        sceneListContainer.appendChild(item);
+      });
+    }
+
+    function loadScene(idx, autoPlay = false) {
+      currentSceneIdx = idx;
+      const sc = scenes[currentSceneIdx];
+      
+      stageImg.src = sc.frame;
+      captionText.textContent = sc.caption;
+      document.getElementById('active-scene-badge').textContent = `SCENE ${sc.id}`;
+      document.getElementById('active-scene-title').textContent = sc.title;
+      document.getElementById('active-scene-desc').textContent = sc.caption;
+
+      audioPlayer.src = sc.audio;
+      audioPlayer.currentTime = 0;
+
+      renderSceneList();
+
+      if (autoPlay) {
+        audioPlayer.play().then(() => {
+          setPlayingState(true);
+        }).catch(() => {});
+      } else {
+        setPlayingState(false);
+      }
+    }
+
+    function togglePlay() {
+      if (isPlaying) {
+        audioPlayer.pause();
+        setPlayingState(false);
+      } else {
+        audioPlayer.play().then(() => {
+          setPlayingState(true);
+        }).catch(err => {
+          console.error("Audio playback error:", err);
+        });
+      }
+    }
+
+    function setPlayingState(playing) {
+      isPlaying = playing;
+      if (playing) {
+        iconPlay.classList.add('hidden');
+        iconPause.classList.remove('hidden');
+      } else {
+        iconPlay.classList.remove('hidden');
+        iconPause.classList.add('hidden');
+      }
+    }
+
+    function nextScene() {
+      if (currentSceneIdx < scenes.length - 1) {
+        loadScene(currentSceneIdx + 1, isPlaying);
+      } else {
+        setPlayingState(false);
+      }
+    }
+
+    function prevScene() {
+      if (currentSceneIdx > 0) {
+        loadScene(currentSceneIdx - 1, isPlaying);
+      }
+    }
+
+    audioPlayer.addEventListener('ended', () => {
+      nextScene();
+    });
+
+    audioPlayer.addEventListener('timeupdate', () => {
+      const cur = audioPlayer.currentTime;
+      const dur = audioPlayer.duration || scenes[currentSceneIdx].duration;
+      const pct = (cur / dur) * 100;
+      timelineSlider.value = pct;
+
+      const m = Math.floor(cur / 60);
+      const s = Math.floor(cur % 60);
+      timeCurrent.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+      const tm = Math.floor(dur / 60);
+      const ts = Math.floor(dur % 60);
+      timeTotal.textContent = `${tm.toString().padStart(2, '0')}:${ts.toString().padStart(2, '0')}`;
+    });
+
+    function seekVideo(val) {
+      const dur = audioPlayer.duration || scenes[currentSceneIdx].duration;
+      audioPlayer.currentTime = (val / 100) * dur;
+    }
+
+    function toggleCaptions() {
+      captionsEnabled = !captionsEnabled;
+      const overlay = document.getElementById('captions-overlay');
+      const btn = document.getElementById('btn-cc');
+      if (captionsEnabled) {
+        overlay.classList.remove('hidden');
+        btn.classList.add('text-brand-400');
+        btn.classList.remove('text-slate-500');
+      } else {
+        overlay.classList.add('hidden');
+        btn.classList.remove('text-brand-400');
+        btn.classList.add('text-slate-500');
+      }
+    }
+
+    function setPlayerMode(mode) {
+      const mp4Container = document.getElementById('mp4-container');
+      const interStage = document.getElementById('interactive-stage');
+      const btnInter = document.getElementById('btn-mode-interactive');
+      const btnMp4 = document.getElementById('btn-mode-mp4');
+      const mp4Video = document.getElementById('mp4-video');
+
+      if (mode === 'mp4') {
+        audioPlayer.pause();
+        setPlayingState(false);
+        mp4Container.classList.remove('hidden');
+        btnMp4.classList.add('bg-brand-500', 'text-slate-950');
+        btnMp4.classList.remove('text-slate-400');
+        btnInter.classList.remove('bg-brand-500', 'text-slate-950');
+        btnInter.classList.add('text-slate-400');
+        mp4Video.play().catch(() => {});
+      } else {
+        mp4Video.pause();
+        mp4Container.classList.add('hidden');
+        btnInter.classList.add('bg-brand-500', 'text-slate-950');
+        btnInter.classList.remove('text-slate-400');
+        btnMp4.classList.remove('bg-brand-500', 'text-slate-950');
+        btnMp4.classList.add('text-slate-400');
+      }
+    }
+
+    function toggleFullscreenCanvas() {
+      const el = document.getElementById('video-canvas');
+      if (!document.fullscreenElement) {
+        el.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    // Initialize
+    loadScene(0, false);
+  </script>
+</body>
+</html>
