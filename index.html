@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<html lang="en" class="h-full bg-slate-950 text-slate-100 scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KCSP — Enterprise WhatsApp Security Awareness Platform | Showcase</title>
+  <title>KCSP — Enterprise WhatsApp Security Awareness Platform</title>
+  <meta name="description" content="Official documentation, interactive presentation deck, video pitch, and app walkthrough for the KCSP WhatsApp Security Awareness Simulation Platform.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +23,9 @@
               400: '#34d399',
               500: '#10b981',
               600: '#059669',
+              700: '#047857',
+              900: '#064e3b',
+              950: '#022c22',
             }
           }
         }
@@ -30,282 +34,482 @@
   </script>
   <style>
     .glass-card {
-      background: rgba(15, 23, 42, 0.8);
+      background: rgba(15, 23, 42, 0.82);
       backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
+    .glass-card-glow {
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      box-shadow: 0 0 35px -10px rgba(16, 185, 129, 0.15);
+    }
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
+      height: 6px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
       background: rgba(255, 255, 255, 0.2);
       border-radius: 9999px;
     }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+    }
   </style>
 </head>
 <body class="min-h-full flex flex-col font-sans bg-slate-950 text-slate-100">
 
-  <!-- TOP NAV BAR -->
+  <!-- TOP STICKY NAVIGATION -->
   <header class="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/90 backdrop-blur px-4 sm:px-8 py-3.5 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-slate-950 font-bold text-lg shadow-lg shadow-brand-500/20">
-        🛡️
-      </div>
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="font-extrabold text-base tracking-wider uppercase text-white">KCSP Showcase</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-500/10 text-brand-400 border border-brand-500/30">v1.0 ENTERPRISE</span>
+      <a href="#overview" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-slate-950 font-extrabold text-lg shadow-lg shadow-brand-500/20 group-hover:scale-105 transition">
+          🛡️
         </div>
-        <p class="text-xs text-slate-400 hidden sm:block">WhatsApp Security Awareness Simulation Platform</p>
-      </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-base tracking-wider uppercase text-white">KCSP Platform</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-500/10 text-brand-400 border border-brand-500/30">OFFICIAL SITE</span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">WhatsApp Security Awareness Simulation Platform</p>
+        </div>
+      </a>
     </div>
 
-    <!-- TABS NAVIGATION -->
-    <nav class="hidden md:flex items-center gap-1 bg-slate-900/90 border border-slate-800 p-1 rounded-2xl">
-      <button onclick="switchTab('overview')" id="tab-btn-overview" class="tab-btn px-4 py-1.5 rounded-xl text-xs font-semibold bg-brand-500 text-slate-950 transition">Overview</button>
-      <button onclick="switchTab('slides')" id="tab-btn-slides" class="tab-btn px-4 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">Presentation Deck</button>
-      <button onclick="switchTab('video')" id="tab-btn-video" class="tab-btn px-4 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">Video Pitch</button>
-      <button onclick="switchTab('walkthrough')" id="tab-btn-walkthrough" class="tab-btn px-4 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">App Screenshots</button>
-      <button onclick="switchTab('docs')" id="tab-btn-docs" class="tab-btn px-4 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">Documentation</button>
+    <!-- MAIN NAV LINKS -->
+    <nav class="hidden lg:flex items-center gap-1 bg-slate-900/90 border border-slate-800 p-1 rounded-2xl">
+      <a href="#overview" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition">Overview</a>
+      <a href="#slides" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition">Slides Presentation</a>
+      <a href="#video" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition">Video Pitch</a>
+      <a href="#walkthrough" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition">App Screenshots</a>
+      <a href="#docs" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition">Documentation</a>
     </nav>
 
-    <!-- ACTION BUTTONS -->
+    <!-- RIGHT ACTIONS -->
     <div class="flex items-center gap-2.5">
-      <a id="gist-link" href="https://gist.github.com/b1162/d5ba7265c106ebdf9dd2a6a417fd2355" target="_blank" class="px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-semibold transition flex items-center gap-1.5">
+      <a href="https://gist.github.com/b1162/d5ba7265c106ebdf9dd2a6a417fd2355" target="_blank" class="px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-semibold transition flex items-center gap-1.5">
         <span>Gist Docs</span>
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
       </a>
-      <a href="kcsp_platform_pitch.mp4" download class="px-3 py-1.5 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 text-xs font-bold transition flex items-center gap-1.5">
+      <a href="https://github.com/b1162/kcsp-presentation" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold transition flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="hidden sm:inline">GitHub</span>
+      </a>
+      <a href="kcsp_platform_pitch.mp4" download class="px-3.5 py-1.5 rounded-xl bg-brand-500 hover:bg-brand-400 text-slate-950 text-xs font-bold transition flex items-center gap-1.5">
         <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
-        <span class="hidden sm:inline">Download Video</span>
+        <span>Download Video</span>
       </a>
     </div>
   </header>
 
-  <!-- MOBILE TABS -->
-  <div class="md:hidden flex overflow-x-auto gap-2 p-3 bg-slate-900 border-b border-slate-800">
-    <button onclick="switchTab('overview')" class="px-3 py-1 rounded-lg text-xs font-semibold bg-brand-500 text-slate-950 whitespace-nowrap">Overview</button>
-    <button onclick="switchTab('slides')" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 whitespace-nowrap">Slides</button>
-    <button onclick="switchTab('video')" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 whitespace-nowrap">Video Pitch</button>
-    <button onclick="switchTab('walkthrough')" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 whitespace-nowrap">Screenshots</button>
-    <button onclick="switchTab('docs')" class="px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 whitespace-nowrap">Docs</button>
-  </div>
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-8 space-y-20">
 
-  <!-- TAB 1: OVERVIEW -->
-  <div id="tab-overview" class="tab-content flex-1 max-w-7xl mx-auto w-full p-4 sm:p-8 space-y-10">
-    <!-- Hero Banner -->
-    <div class="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/40 border border-slate-800 relative overflow-hidden shadow-2xl space-y-6">
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        AUTHORIZED SECURITY SIMULATION PLATFORM
-      </div>
-
-      <div class="max-w-3xl space-y-3">
-        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-          Empowering Enterprises to Defend the <span class="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">WhatsApp Threat Vector</span>
-        </h1>
-        <p class="text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-          Traditional Secure Email Gateways catch corporate inbox phishing. But threat actors now reach employees directly on WhatsApp with open rates exceeding 98%. KCSP safely simulates, educates, and measures human cyber resilience.
-        </p>
-      </div>
-
-      <!-- Quick Action Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 pt-4">
-        <div onclick="switchTab('slides')" class="p-4 rounded-2xl glass-card hover:border-emerald-500/50 cursor-pointer transition space-y-2 group">
-          <div class="text-2xl">📊</div>
-          <div class="font-bold text-sm text-white group-hover:text-brand-400 transition">Presentation Deck</div>
-          <p class="text-xs text-slate-400">12 interactive slides with speaker notes & PDF export.</p>
-        </div>
-        <div onclick="switchTab('video')" class="p-4 rounded-2xl glass-card hover:border-brand-500/50 cursor-pointer transition space-y-2 group">
-          <div class="text-2xl">🎬</div>
-          <div class="font-bold text-sm text-white group-hover:text-brand-400 transition">Video Pitch</div>
-          <p class="text-xs text-slate-400">1080p narrated video walkthrough with subtitles.</p>
-        </div>
-        <div onclick="switchTab('walkthrough')" class="p-4 rounded-2xl glass-card hover:border-cyan-500/50 cursor-pointer transition space-y-2 group">
-          <div class="text-2xl">🖼️</div>
-          <div class="font-bold text-sm text-white group-hover:text-cyan-400 transition">App Screenshots</div>
-          <p class="text-xs text-slate-400">11 Full HD captures of the live production console.</p>
-        </div>
-        <div onclick="switchTab('docs')" class="p-4 rounded-2xl glass-card hover:border-purple-500/50 cursor-pointer transition space-y-2 group">
-          <div class="text-2xl">📚</div>
-          <div class="font-bold text-sm text-white group-hover:text-purple-400 transition">Full Documentation</div>
-          <p class="text-xs text-slate-400">Architecture, GDPR, Docker, and API specifications.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Comparison Stats -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="p-6 rounded-3xl glass-card space-y-4">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-          <span class="font-bold text-slate-300 flex items-center gap-2"><span>✉️</span> Corporate Email (Hardened)</span>
-          <span class="text-xs px-2.5 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">99%+ Filtered</span>
-        </div>
-        <ul class="space-y-2.5 text-xs text-slate-400">
-          <li>• Multi-million dollar Secure Email Gateways (SEGs).</li>
-          <li>• DMARC & SPF actively block spoofed sender domains.</li>
-          <li>• ~20% open rate with delayed worker interaction.</li>
-        </ul>
-      </div>
-
-      <div class="p-6 rounded-3xl glass-card border-emerald-500/30 space-y-4">
-        <div class="flex items-center justify-between pb-3 border-b border-emerald-500/20">
-          <span class="font-bold text-white flex items-center gap-2"><span>📱</span> WhatsApp Messaging (The Exposure)</span>
-          <span class="text-xs px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold font-mono">Zero Gateway Filter</span>
-        </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-center">
-            <div class="text-2xl font-extrabold text-emerald-400">>98%</div>
-            <div class="text-[10px] text-slate-300">Open Rate</div>
+    <!-- 1. HERO SECTION -->
+    <section id="overview" class="space-y-8 pt-4">
+      <div class="p-8 sm:p-14 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/40 border border-slate-800 shadow-2xl relative overflow-hidden space-y-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            AUTHORIZED SECURITY AWARENESS PLATFORM
           </div>
-          <div class="p-3 rounded-xl bg-teal-950/40 border border-teal-500/30 text-center">
-            <div class="text-2xl font-extrabold text-teal-400">< 3 min</div>
-            <div class="text-[10px] text-slate-300">Avg. Response Time</div>
+          <span class="text-xs font-mono text-slate-400">NEXT.JS 14+ // PRISMA // DOCKER READY</span>
+        </div>
+
+        <div class="max-w-3xl space-y-4">
+          <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight">
+            Defend the Unmonitored <br>
+            <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">WhatsApp Threat Vector</span>
+          </h1>
+          <p class="text-lg sm:text-xl text-slate-300 font-light leading-relaxed">
+            While enterprises have hardened corporate email gateways, modern attackers bypass perimeter filters completely—targeting employees directly on personal and work smartphones via WhatsApp.
+          </p>
+        </div>
+
+        <!-- Quick Anchor Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-4">
+          <a href="#slides" class="p-4 rounded-2xl glass-card hover:border-emerald-500/50 transition group space-y-1">
+            <div class="text-2xl mb-1">📊</div>
+            <div class="font-bold text-xs sm:text-sm text-white group-hover:text-brand-400 transition">Presentation Deck</div>
+            <p class="text-[11px] text-slate-400">12 interactive slides with speaker notes</p>
+          </a>
+          <a href="#video" class="p-4 rounded-2xl glass-card hover:border-brand-500/50 transition group space-y-1">
+            <div class="text-2xl mb-1">🎬</div>
+            <div class="font-bold text-xs sm:text-sm text-white group-hover:text-brand-400 transition">Video Pitch Player</div>
+            <p class="text-[11px] text-slate-400">8 chapters with audio & subtitles</p>
+          </a>
+          <a href="#walkthrough" class="p-4 rounded-2xl glass-card hover:border-cyan-500/50 transition group space-y-1">
+            <div class="text-2xl mb-1">🖼️</div>
+            <div class="font-bold text-xs sm:text-sm text-white group-hover:text-cyan-400 transition">Live App Screenshots</div>
+            <p class="text-[11px] text-slate-400">11 Full HD UI screen captures</p>
+          </a>
+          <a href="#docs" class="p-4 rounded-2xl glass-card hover:border-purple-500/50 transition group space-y-1">
+            <div class="text-2xl mb-1">📚</div>
+            <div class="font-bold text-xs sm:text-sm text-white group-hover:text-purple-400 transition">Technical Docs</div>
+            <p class="text-[11px] text-slate-400">Architecture, GDPR, and Docker</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Threat Comparison Banner -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 sm:p-8 rounded-3xl glass-card space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <span class="font-bold text-slate-300 text-base flex items-center gap-2"><span>✉️</span> Corporate Email (Hardened)</span>
+            <span class="text-xs px-2.5 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">99%+ Blocked</span>
+          </div>
+          <ul class="space-y-3 text-xs sm:text-sm text-slate-400">
+            <li class="flex items-start gap-2.5">
+              <span class="text-rose-400 font-bold">✕</span>
+              <span>Guarded by Secure Email Gateways (SEGs), SPF, DMARC, and DKIM.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-rose-400 font-bold">✕</span>
+              <span>Low open rate (~20%) and high worker suspicion on desktop.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="text-slate-500 font-bold">~</span>
+              <span>Attackers have abandoned email for high-yield mobile social engineering.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="p-6 sm:p-8 rounded-3xl glass-card-glow space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-emerald-500/20">
+            <span class="font-bold text-white text-base flex items-center gap-2"><span>📱</span> WhatsApp Messaging (The Exposure)</span>
+            <span class="text-xs px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold font-mono">Zero Gateway Filter</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3.5 rounded-2xl bg-emerald-950/40 border border-emerald-500/30 text-center">
+              <div class="text-3xl font-extrabold text-emerald-400">>98%</div>
+              <div class="text-[11px] text-slate-300 font-medium">Open Rate within Minutes</div>
+            </div>
+            <div class="p-3.5 rounded-2xl bg-teal-950/40 border border-teal-500/30 text-center">
+              <div class="text-3xl font-extrabold text-teal-400">< 3 min</div>
+              <div class="text-[11px] text-slate-300 font-medium">Average Response Time</div>
+            </div>
+          </div>
+          <ul class="space-y-2 text-xs sm:text-sm text-slate-300">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span><strong>High Implicit Trust:</strong> Treated as personal, urgent, and authentic communication.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span><strong>Enterprise Blind Spot:</strong> Traditional security awareness tools lack native WhatsApp simulation capabilities.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 4 Core Pillars -->
+      <div class="space-y-4">
+        <h2 class="text-xl font-bold text-white tracking-tight">Four Architectural Pillars</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div class="p-5 rounded-2xl glass-card space-y-2.5">
+            <div class="text-2xl">🛡️</div>
+            <h3 class="font-bold text-sm text-white">Zero-Credential Safe</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Form submission hooks strictly discard passwords in client RAM before network transit. Zero employee secrets ever stored.</p>
+          </div>
+          <div class="p-5 rounded-2xl glass-card space-y-2.5">
+            <div class="text-2xl">⚡</div>
+            <h3 class="font-bold text-sm text-white">Multi-Provider Engine</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Local Mock for $0 sandboxing, WASender for cloud delivery, and WPPConnect for self-hosted sovereign nodes.</p>
+          </div>
+          <div class="p-5 rounded-2xl glass-card space-y-2.5">
+            <div class="text-2xl">💡</div>
+            <h3 class="font-bold text-sm text-white">Teachable Moments</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Simulation pages instantly morph into educational debrief cards explaining the 3 subtle red flags missed.</p>
+          </div>
+          <div class="p-5 rounded-2xl glass-card space-y-2.5">
+            <div class="text-2xl">🇪🇺</div>
+            <h3 class="font-bold text-sm text-white">GDPR by Design</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">32-byte opaque tokens, HMAC SHA-256 IP/UA hashing with dynamic salt, and 1-click participant data anonymization.</p>
           </div>
         </div>
-        <p class="text-xs text-slate-300">
-          High trust, personal communication context, and zero visibility for traditional enterprise security tools. KCSP closes this gap.
-        </p>
       </div>
-    </div>
+    </section>
 
-    <!-- 4 Architectural Pillars -->
-    <div class="space-y-4">
-      <h2 class="text-lg font-bold text-white">The Four Pillars of KCSP</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <div class="p-5 rounded-2xl glass-card space-y-2">
-          <div class="text-xl">🛡️</div>
-          <h3 class="font-bold text-sm text-white">Zero-Credential Safe</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Form interception scripts permanently discard passwords in client RAM. Zero user credentials stored.</p>
+    <!-- 2. PRESENTATION DECK EMBED -->
+    <section id="slides" class="space-y-4 pt-6 border-t border-slate-800/80">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-bold">EXECUTIVE PRESENTATION</div>
+          <h2 class="text-2xl font-extrabold text-white">Interactive 16:9 Presentation Deck</h2>
+          <p class="text-xs text-slate-400">Use <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-brand-400 font-mono">Space</kbd> or arrows to advance, <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-brand-400 font-mono">N</kbd> for Speaker Notes, <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-brand-400 font-mono">F</kbd> for Fullscreen.</p>
         </div>
-        <div class="p-5 rounded-2xl glass-card space-y-2">
-          <div class="text-xl">⚡</div>
-          <h3 class="font-bold text-sm text-white">Multi-Provider Engine</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Local Mock for $0 sandboxing, WASender for cloud delivery, and WPPConnect for self-hosted sovereign nodes.</p>
-        </div>
-        <div class="p-5 rounded-2xl glass-card space-y-2">
-          <div class="text-xl">💡</div>
-          <h3 class="font-bold text-sm text-white">Teachable Moments</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">Immediate educational debrief card explaining the 3 subtle red flags missed during the drill.</p>
-        </div>
-        <div class="p-5 rounded-2xl glass-card space-y-2">
-          <div class="text-xl">🇪🇺</div>
-          <h3 class="font-bold text-sm text-white">GDPR Privacy by Design</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">32-byte opaque tokens, HMAC SHA-256 IP/UA hashing, and 1-click participant data anonymization.</p>
+        <div class="flex items-center gap-2">
+          <a href="slides.html" target="_blank" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+            <span>Open Standalone Slides</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- TAB 2: SLIDES -->
-  <div id="tab-slides" class="tab-content hidden flex-1 flex flex-col p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-3">
-    <div class="flex items-center justify-between">
-      <div>
-        <h2 class="font-bold text-lg text-white">Interactive 16:9 Presentation Deck</h2>
-        <p class="text-xs text-slate-400">Press <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-brand-400 font-mono">Space</kbd> to advance, <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-brand-400 font-mono">N</kbd> for Speaker Notes, <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-brand-400 font-mono">F</kbd> for Fullscreen.</p>
+      <div class="w-full aspect-video rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+        <iframe src="slides.html" class="w-full h-full border-0" allow="fullscreen"></iframe>
       </div>
-      <a href="slides.html" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
-        <span>Open Standalone Fullscreen</span>
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-      </a>
-    </div>
-    <div class="w-full aspect-video rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
-      <iframe src="slides.html" class="w-full h-full border-0" allow="fullscreen"></iframe>
-    </div>
-  </div>
+    </section>
 
-  <!-- TAB 3: VIDEO PITCH -->
-  <div id="tab-video" class="tab-content hidden flex-1 flex flex-col p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-3">
-    <div class="flex items-center justify-between">
-      <div>
-        <h2 class="font-bold text-lg text-white">KCSP Video Pitch & Interactive Player</h2>
-        <p class="text-xs text-slate-400">Includes 8 chapters, synchronized audio narration, subtitles, and direct MP4 download.</p>
+    <!-- 3. VIDEO PITCH PLAYER EMBED -->
+    <section id="video" class="space-y-4 pt-6 border-t border-slate-800/80">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="text-xs font-mono text-brand-400 uppercase tracking-wider font-bold">MULTIMEDIA WALKTHROUGH</div>
+          <h2 class="text-2xl font-extrabold text-white">Video Pitch Player & Interactive Storyboard</h2>
+          <p class="text-xs text-slate-400">8 narrated chapters with synchronized voiceover audio, chapter selector, and subtitles.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="video.html" target="_blank" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+            <span>Open Standalone Player</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+          <a href="kcsp_platform_pitch.mp4" download class="px-3.5 py-2 rounded-xl bg-brand-500/20 hover:bg-brand-500/30 text-brand-300 border border-brand-500/30 text-xs font-bold transition flex items-center gap-1.5">
+            <span>Download MP4 (4.7 MB)</span>
+          </a>
+        </div>
       </div>
-      <a href="video.html" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
-        <span>Open Standalone Player</span>
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-      </a>
-    </div>
-    <div class="w-full h-[720px] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
-      <iframe src="video.html" class="w-full h-full border-0" allow="fullscreen"></iframe>
-    </div>
-  </div>
 
-  <!-- TAB 4: APP WALKTHROUGH -->
-  <div id="tab-walkthrough" class="tab-content hidden flex-1 flex flex-col p-4 sm:p-6 max-w-7xl mx-auto w-full space-y-3">
-    <div class="flex items-center justify-between">
-      <div>
-        <h2 class="font-bold text-lg text-white">Live Application Walkthrough & Screenshots</h2>
-        <p class="text-xs text-slate-400">11 production UI screenshots with architectural feature callouts and route details.</p>
+      <div class="w-full h-[680px] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+        <iframe src="video.html" class="w-full h-full border-0" allow="fullscreen"></iframe>
       </div>
-      <a href="walkthrough.html" target="_blank" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
-        <span>Open Standalone Gallery</span>
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-      </a>
-    </div>
-    <div class="w-full h-[760px] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
-      <iframe src="walkthrough.html" class="w-full h-full border-0" allow="fullscreen"></iframe>
-    </div>
-  </div>
+    </section>
 
-  <!-- TAB 5: DOCUMENTATION -->
-  <div id="tab-docs" class="tab-content hidden flex-1 max-w-7xl mx-auto w-full p-4 sm:p-8 space-y-6">
-    <div class="flex items-center justify-between">
-      <div>
-        <h2 class="font-bold text-xl text-white">Enterprise Technical Specifications</h2>
-        <p class="text-xs text-slate-400">Architecture, API endpoints, GDPR minimization, deployment guides, and pitch scripts.</p>
+    <!-- 4. APP WALKTHROUGH & SCREENSHOT GALLERY EMBED -->
+    <section id="walkthrough" class="space-y-4 pt-6 border-t border-slate-800/80">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="text-xs font-mono text-cyan-400 uppercase tracking-wider font-bold">PRODUCTION UI GALLERY</div>
+          <h2 class="text-2xl font-extrabold text-white">Live Application Walkthrough & Screenshots</h2>
+          <p class="text-xs text-slate-400">Explore 11 high-definition screenshots of every production view with feature breakdowns.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="walkthrough.html" target="_blank" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+            <span>Open Standalone Gallery</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
       </div>
-    </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <a href="docs/SLIDES.md" target="_blank" class="p-5 rounded-2xl glass-card hover:border-brand-500/40 transition space-y-2">
-        <div class="font-bold text-sm text-brand-400">📑 SLIDES.md</div>
-        <p class="text-xs text-slate-300">Complete 12-slide presentation deck with detailed speaker notes.</p>
-      </a>
-      <a href="docs/VIDEO_PITCH_SCRIPT.md" target="_blank" class="p-5 rounded-2xl glass-card hover:border-brand-500/40 transition space-y-2">
-        <div class="font-bold text-sm text-brand-400">📜 VIDEO_PITCH_SCRIPT.md</div>
-        <p class="text-xs text-slate-300">2-minute executive pitch & 5-minute technical deep dive scripts.</p>
-      </a>
-      <a href="docs/APP_WALKTHROUGH.md" target="_blank" class="p-5 rounded-2xl glass-card hover:border-brand-500/40 transition space-y-2">
-        <div class="font-bold text-sm text-brand-400">🧭 APP_WALKTHROUGH.md</div>
-        <p class="text-xs text-slate-300">Complete 11-screen UI tour with annotated feature lists.</p>
-      </a>
-      <a href="docs/architecture-and-api.md" target="_blank" class="p-5 rounded-2xl glass-card hover:border-brand-500/40 transition space-y-2">
-        <div class="font-bold text-sm text-cyan-400">🏗️ architecture-and-api.md</div>
-        <p class="text-xs text-slate-300">Monorepo packages, queue dispatch engine, and webhook synchronization.</p>
-      </a>
-      <a href="docs/security-and-gdpr.md" target="_blank" class="p-5 rounded-2xl glass-card hover:border-brand-500/40 transition space-y-2">
-        <div class="font-bold text-sm text-purple-400">🇪🇺 security-and-gdpr.md</div>
-        <p class="text-xs text-slate-300">HMAC SHA-256 hashing, zero-credential DOM interception, and right to erasure.</p>
-      </a>
-      <a href="docs/digitalocean-deployment.md" target="_blank" class="p-5 rounded-2xl glass-card hover:border-brand-500/40 transition space-y-2">
-        <div class="font-bold text-sm text-emerald-400">🐳 digitalocean-deployment.md</div>
-        <p class="text-xs text-slate-300">Docker Compose production setup with Caddy automated HTTPS.</p>
-      </a>
-    </div>
-  </div>
+      <div class="w-full h-[740px] rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+        <iframe src="walkthrough.html" class="w-full h-full border-0" allow="fullscreen"></iframe>
+      </div>
+    </section>
+
+    <!-- 5. COMPLETE IN-BROWSER DOCUMENTATION HUB -->
+    <section id="docs" class="space-y-6 pt-6 border-t border-slate-800/80">
+      <div>
+        <div class="text-xs font-mono text-purple-400 uppercase tracking-wider font-bold">TECHNICAL SPECIFICATIONS</div>
+        <h2 class="text-2xl font-extrabold text-white">Complete In-Browser Documentation</h2>
+        <p class="text-xs text-slate-400">Read architecture, security, GDPR, deployment, and slide specifications directly in your browser.</p>
+      </div>
+
+      <!-- DOCS CONTAINER WITH SIDEBAR -->
+      <div class="flex flex-col lg:flex-row gap-6 items-start">
+        
+        <!-- SIDEBAR -->
+        <div class="w-full lg:w-72 shrink-0 p-4 rounded-3xl glass-card space-y-2 sticky top-20">
+          <div class="text-xs font-mono text-slate-500 uppercase tracking-wider font-bold px-3 py-1">Chapters</div>
+          <button onclick="showDoc('arch')" id="doc-btn-arch" class="doc-btn w-full text-left px-3 py-2 rounded-xl text-xs font-bold bg-brand-500 text-slate-950 transition flex items-center gap-2">
+            <span>🏗️</span> <span>Architecture & API</span>
+          </button>
+          <button onclick="showDoc('gdpr')" id="doc-btn-gdpr" class="doc-btn w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
+            <span>🛡️</span> <span>Security & GDPR</span>
+          </button>
+          <button onclick="showDoc('deploy')" id="doc-btn-deploy" class="doc-btn w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
+            <span>🐳</span> <span>Docker Deployment</span>
+          </button>
+          <button onclick="showDoc('postgres')" id="doc-btn-postgres" class="doc-btn w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
+            <span>🗄️</span> <span>Postgres Migration</span>
+          </button>
+          <button onclick="showDoc('slides-text')" id="doc-btn-slides-text" class="doc-btn w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
+            <span>📑</span> <span>Slide Deck Script</span>
+          </button>
+          <button onclick="showDoc('pitch-script')" id="doc-btn-pitch-script" class="doc-btn w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
+            <span>📜</span> <span>Video Pitch Script</span>
+          </button>
+          <button onclick="showDoc('app-guide')" id="doc-btn-app-guide" class="doc-btn w-full text-left px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 transition flex items-center gap-2">
+            <span>🧭</span> <span>App Walkthrough Guide</span>
+          </button>
+        </div>
+
+        <!-- DOC CONTENT PANELS -->
+        <div class="flex-1 w-full p-6 sm:p-10 rounded-3xl glass-card space-y-6">
+          
+          <!-- DOC 1: ARCHITECTURE -->
+          <article id="doc-content-arch" class="doc-panel space-y-6 text-slate-300 text-sm leading-relaxed">
+            <div class="border-b border-slate-800 pb-4">
+              <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 font-mono text-[11px] font-bold">ARCHITECTURE SPECIFICATION</span>
+              <h3 class="text-2xl font-bold text-white mt-2">KCSP Modular Monolith Architecture</h3>
+            </div>
+            
+            <p>The KCSP platform is engineered as an enterprise-grade modular monolith with clear domain boundaries, unified TypeScript typings, and zero vendor lock-in.</p>
+            
+            <pre class="bg-slate-900 border border-slate-800 p-4 rounded-2xl font-mono text-xs text-emerald-400 overflow-x-auto">
+KCSP/
+├── apps/
+│   └── web/                   # Next.js 14+ Fullstack Admin Console & APIs
+│       ├── (admin)/           # Protected Security Console (Dashboard, Queue, Analytics)
+│       ├── t/[token]/         # Opaque Tracking Redirector (HMAC Hashing)
+│       └── s/[token]/         # Credential-Safe Simulation & Debrief Engine
+└── packages/
+    ├── shared/                # Core Zod Schemas, Cryptography & Sanitization
+    ├── database/              # Multi-Dialect Prisma (SQLite WAL / PostgreSQL)
+    ├── whatsapp/              # Pluggable Provider Abstraction (Mock, WASender, WPPConnect)
+    ├── tracking/              # Opaque Token Generation & Event Store
+    ├── engine/                # Concurrency Queue, Rate Limiting & Webhook Sync
+    └── analytics/             # Department Risk Aggregation & Reporting Engine</pre>
+
+            <h4 class="text-base font-bold text-white">WhatsApp Provider Abstraction</h4>
+            <p>Providers implement a clean, decoupled TypeScript interface, allowing instant toggling without modifying business logic:</p>
+            <pre class="bg-slate-900 border border-slate-800 p-4 rounded-2xl font-mono text-xs text-cyan-300 overflow-x-auto">
+interface WhatsAppProvider {
+  sendMessage(request: SendMessageRequest): Promise<SendMessageResponse>;
+  getMessageStatus(providerMessageId: string): Promise<MessageStatusResponse>;
+  validateConfiguration(): Promise<boolean>;
+  parseWebhook(payload: unknown, headers?: Record<string, string>): NormalizedWebhookEvent | null;
+  checkSessionStatus?(): Promise<{ connected: boolean; status: string; message?: string }>;
+}</pre>
+          </article>
+
+          <!-- DOC 2: GDPR & SECURITY -->
+          <article id="doc-content-gdpr" class="doc-panel hidden space-y-6 text-slate-300 text-sm leading-relaxed">
+            <div class="border-b border-slate-800 pb-4">
+              <span class="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono text-[11px] font-bold">ETHICAL SHIELD & PRIVACY</span>
+              <h3 class="text-2xl font-bold text-white mt-2">Zero-Credential Safety & GDPR Compliance</h3>
+            </div>
+
+            <h4 class="text-base font-bold text-white">1. Zero-Credential Harvesting Guarantee</h4>
+            <p>Collecting actual employee passwords in awareness drills is dangerous, unnecessary, and creates legal liabilities under labor regulations. KCSP strictly solves this:</p>
+            <ul class="space-y-2 text-xs sm:text-sm">
+              <li class="flex items-start gap-2"><span class="text-brand-400">✓</span> Client-side DOM scripts intercept all form submissions before network requests are dispatched.</li>
+              <li class="flex items-start gap-2"><span class="text-brand-400">✓</span> Sensitive values (passwords, PINs, tokens) are purged and replaced with <code>USER_ENTERED_VALUE</code>.</li>
+              <li class="flex items-start gap-2"><span class="text-brand-400">✓</span> The backend logs only a binary boolean: <code>SIMULATION_INTERACTION = TRUE</code>.</li>
+            </ul>
+
+            <h4 class="text-base font-bold text-white">2. HMAC SHA-256 IP/User-Agent Hashing</h4>
+            <p>Under GDPR Article 5 data minimization, raw IP addresses and browser signatures are never stored plaintext. They are salted with a dynamic server secret and hashed via HMAC SHA-256.</p>
+
+            <h4 class="text-base font-bold text-white">3. 1-Click Participant Data Anonymization</h4>
+            <p>When an employee requests right-to-be-forgotten erasure (GDPR Article 17), administrators click Anonymize. Employee names and phones are permanently scrubbed while aggregate statistical risk scores remain intact for historical compliance benchmarking.</p>
+          </article>
+
+          <!-- DOC 3: DEPLOYMENT -->
+          <article id="doc-content-deploy" class="doc-panel hidden space-y-6 text-slate-300 text-sm leading-relaxed">
+            <div class="border-b border-slate-800 pb-4">
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono text-[11px] font-bold">DEVOPS & DEPLOYMENT</span>
+              <h3 class="text-2xl font-bold text-white mt-2">Docker Compose & Automated Caddy HTTPS</h3>
+            </div>
+
+            <p>KCSP deploys in a single command using our multi-stage optimized Dockerfile and Caddy reverse proxy handling automatic TLS certificates.</p>
+
+            <pre class="bg-slate-900 border border-slate-800 p-4 rounded-2xl font-mono text-xs text-emerald-400 overflow-x-auto">
+# 1. Clone repository
+git clone https://github.com/b1162/kcsp-presentation.git
+cd kcsp-presentation
+
+# 2. Configure environment
+cp .env.example .env
+
+# 3. Spin up production container
+docker compose -f docker-compose.prod.yml up -d --build
+
+# 4. Verify health endpoint
+curl http://localhost:3000/api/health</pre>
+          </article>
+
+          <!-- DOC 4: POSTGRES -->
+          <article id="doc-content-postgres" class="doc-panel hidden space-y-6 text-slate-300 text-sm leading-relaxed">
+            <div class="border-b border-slate-800 pb-4">
+              <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[11px] font-bold">DATABASE TIER</span>
+              <h3 class="text-2xl font-bold text-white mt-2">Migrating from SQLite to Managed PostgreSQL</h3>
+            </div>
+
+            <p>KCSP supports both SQLite in Write-Ahead Logging (WAL) mode and Managed PostgreSQL. Switching to PostgreSQL requires only updating the provider URL in <code>schema.prisma</code> and running Prisma migrations:</p>
+
+            <pre class="bg-slate-900 border border-slate-800 p-4 rounded-2xl font-mono text-xs text-cyan-300 overflow-x-auto">
+# Set PostgreSQL connection string
+DATABASE_URL="postgresql://user:password@pg-host:5432/kcsp_db?schema=public"
+
+# Run Prisma migration
+npx prisma migrate deploy</pre>
+          </article>
+
+          <!-- DOC 5: SLIDES TEXT -->
+          <article id="doc-content-slides-text" class="doc-panel hidden space-y-6 text-slate-300 text-sm leading-relaxed">
+            <div class="border-b border-slate-800 pb-4">
+              <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 font-mono text-[11px] font-bold">SPEAKER NOTES & TRANSCRIPT</span>
+              <h3 class="text-2xl font-bold text-white mt-2">12-Slide Presentation Text & Speaker Notes</h3>
+            </div>
+            
+            <p>Every slide includes detailed presentation talking points for executive briefings:</p>
+            <div class="space-y-4 text-xs sm:text-sm">
+              <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+                <div class="font-bold text-white">Slide 1: Title & Executive Introduction</div>
+                <div class="text-slate-400 italic">"KCSP is the first enterprise-grade platform specifically designed to simulate, assess, and train human resilience against WhatsApp-based social engineering."</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+                <div class="font-bold text-white">Slide 2: The Enterprise Blind Spot</div>
+                <div class="text-slate-400 italic">"Email security has matured. Attackers bypass corporate inboxes straight into mobile messaging apps where open rates exceed 98% and response times are under 3 minutes."</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
+                <div class="font-bold text-white">Slide 7: Zero-Credential Safe Simulation</div>
+                <div class="text-slate-400 italic">"Our client-side interception purges passwords directly in the browser. Zero passwords ever touch our servers, removing all legal liabilities."</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DOC 6: PITCH SCRIPT -->
+          <article id="doc-content-pitch-script" class="doc-panel hidden space-y-6 text-slate-300 text-sm leading-relaxed">
+            <div class="border-b border-slate-800 pb-4">
+              <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 font-mono text-[11px] font-bold">VOICEOVER SCRIPT</span>
+              <h3 class="text-2xl font-bold text-white mt-2">Video Pitch Script & Cue Sheet</h3>
+            </div>
+            <p>Contains both the 2-Minute Executive Pitch and the 5-Minute Technical Product Deep Dive, with exact visual cues, on-screen text, and narration.</p>
+          </article>
+
+          <!-- DOC 7: APP GUIDE -->
+          <article id="doc-content-app-guide" class="doc-panel hidden space-y-6 text-slate-300 text-sm leading-relaxed">
+            <div class="border-b border-slate-800 pb-4">
+              <span class="px-2 py-0.5 rounded bg-brand-500/20 text-brand-400 font-mono text-[11px] font-bold">OPERATOR GUIDE</span>
+              <h3 class="text-2xl font-bold text-white mt-2">App Walkthrough & Operator Workflows</h3>
+            </div>
+            <p>Comprehensive tour explaining every button, setting, and workflow across the 11 production screens of the platform.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <!-- FOOTER -->
-  <footer class="border-t border-slate-800/80 bg-slate-950 px-6 py-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
+  <footer class="border-t border-slate-800/80 bg-slate-950 px-6 py-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3 max-w-7xl mx-auto w-full">
     <div>KCSP WhatsApp Security Awareness Simulation Platform // Massimiliano Bozza</div>
-    <div class="font-mono text-slate-400">Authorized Penetration Testing & Corporate Resilience</div>
+    <div class="flex items-center gap-4 text-slate-400 font-mono">
+      <a href="https://github.com/b1162/kcsp-presentation" target="_blank" class="hover:text-white">GitHub Repo</a>
+      <span>•</span>
+      <a href="https://gist.github.com/b1162/d5ba7265c106ebdf9dd2a6a417fd2355" target="_blank" class="hover:text-white">GitHub Gist</a>
+      <span>•</span>
+      <a href="kcsp_platform_pitch.mp4" download class="hover:text-white">MP4 Video</a>
+    </div>
   </footer>
 
   <script>
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-brand-500', 'text-slate-950');
-        btn.classList.add('text-slate-400');
+    function showDoc(docId) {
+      document.querySelectorAll('.doc-panel').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.doc-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-500', 'text-slate-950', 'font-bold');
+        btn.classList.add('text-slate-300', 'font-semibold');
       });
 
-      const activeContent = document.getElementById(`tab-${tabId}`);
-      const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+      const panel = document.getElementById(`doc-content-${docId}`);
+      const btn = document.getElementById(`doc-btn-${docId}`);
 
-      if (activeContent) activeContent.classList.remove('hidden');
-      if (activeBtn) {
-        activeBtn.classList.add('bg-brand-500', 'text-slate-950');
-        activeBtn.classList.remove('text-slate-400');
+      if (panel) panel.classList.remove('hidden');
+      if (btn) {
+        btn.classList.add('bg-brand-500', 'text-slate-950', 'font-bold');
+        btn.classList.remove('text-slate-300', 'font-semibold');
       }
     }
   </script>
